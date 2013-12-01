@@ -1,0 +1,36 @@
+database structure
+
+table name: templates
+
+id int
+name varchar(20)
+rating int
+description varchar(400)
+used_personal int
+used_all int
+author varchar(50)
+author_email varchar(100)
+send_mail bit
+shared_date date
+elements varchar(2000)
+tags varchar(500)
+picture image
+
+example of a record: 32, Name of List, 3, bla bla, 4, 341, ion, ion@ion.com, 0, 20-02-1023;Shirt,Coat,Pants,Suit,Ball,Sun screen;sea side,summer
+
+
+table name: lists
+
+name varchar(20)
+elements varchar(2500)
+selected varchar(500)
+picture image
+thumbnail image
+
+example of a record: Name of List;Shirt,Coat,Pants,Suit,Ball,Sun screen;0,0,0,1,0,1
+
+
+local properties
+
+last_sync date       ex: '02-10-2011'
+not_synced string    ex: '3,6,12,43,2'
