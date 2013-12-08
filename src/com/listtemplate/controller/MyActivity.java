@@ -1,7 +1,8 @@
-package com.listtemplate;
+package com.listtemplate.controller;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.listtemplate.R;
 
 public class MyActivity extends Activity {
     /**
