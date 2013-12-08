@@ -33,6 +33,14 @@ public class DBController {
     }
 
     /**
+     * Write the template to the database.
+     * If present do nothing.
+     * @param templateToWrite the template to be written
+     */
+    public static void writeTemplate(TemplateRecord templateToWrite){
+        // TODO: implement method
+    }
+    /**
      * Load all the lists from the database
      * @return list of the lists :)
      */
@@ -50,6 +58,13 @@ public class DBController {
        return new ArrayList<TemplateRecord>();
     }
 
+    /**
+     * Update all the database for templates
+     * @param listOfTemplates current list of templates
+     */
+    public static void updateTemplates(List<TemplateRecord> listOfTemplates){
+        // TODO: implement method
+    }
     /**
      * Delete all the data
      */

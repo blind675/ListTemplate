@@ -1,7 +1,7 @@
 package com.listtemplate.model;
 
 import android.test.AndroidTestCase;
-import com.listtemplate.model.exceptions.AlreadyPresentException;
+import com.listtemplate.model.data.type.TemplateRecord;
 
 /**
  * Created with IntelliJ IDEA.
@@ -63,6 +63,63 @@ public class AppModelTest extends AndroidTestCase {
         AppModel.getInstance().discardList();
         // see if removed correctly
         assertEquals("Number of lists is wrong",0, AppModel.getInstance().getNumberOfLists());
+        // delete all
+        AppModel.getInstance().deleteAll();
+    }
+
+    public void testCreateShareTemplate(){
+        // create new template
+        TemplateRecord templateRecord = new TemplateRecord("Test Template","Bla bla Test","Ion","ion@smt.com",false,null);
+        templateRecord.addElement("Pants");
+        templateRecord.addElement("Shirt");
+        templateRecord.addElement("Pants");
+        templateRecord.addElement("Sun screen");
+        // save template do DB
+        AppModel.getInstance().saveTemplate(templateRecord);
+        // test if ok
+        assertEquals("Not added",1,AppModel.getInstance().getNumberOfTemplates());
+        AppModel.getInstance().saveTemplate(templateRecord);
+        // test if not added twice
+        assertEquals("Added twice",1,AppModel.getInstance().getNumberOfTemplates());
+        // clear singleton
+        AppModel.getInstance().clearAll();
+        // test if empty
+        assertEquals("Not empty",0,AppModel.getInstance().getNumberOfTemplates());
+        // load template from DB
+        AppModel.getInstance().loadTemplates();
+        // test if ok
+        assertEquals("Not loaded",1,AppModel.getInstance().getNumberOfTemplates());
+        // delete all
+        AppModel.getInstance().deleteAll();
+    }
+
+    public void testCreateFromTemplate(){
+        // create new template
+        TemplateRecord templateRecord = new TemplateRecord("Test Template","Bla bla Test","Ion","ion@smt.com",false,null);
+        templateRecord.addElement("Pants");
+        templateRecord.addElement("Shirt");
+        templateRecord.addElement("Pants");
+        templateRecord.addElement("Sun screen");
+        // save template
+        AppModel.getInstance().saveTemplate(templateRecord);
+        // test if added ok
+        assertEquals("Not added",1,AppModel.getInstance().getNumberOfTemplates());
+        // create new list from template
+        AppModel.getInstance().createListFromTemplate(0);
+        // test if ok
+        assertEquals("List size is wrong", 3, AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
+        assertEquals("Element 1 is wrong","Pants",AppModel.getInstance().getElementOfTheCurrentList(0));
+        assertEquals("Selected state of element \"Shirt\" is wrong",false,AppModel.getInstance().isElementSelected("Shirt"));
+        // add element
+        AppModel.getInstance().addElementToTheCurrentList("Socks");
+        // test if added ok
+        assertEquals("List size is wrong", 4, AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
+        assertEquals("Element 4 is wrong","Socks",AppModel.getInstance().getElementOfTheCurrentList(3));
+        // remove element
+        AppModel.getInstance().removeElementFromTheCurrentList("Shirt");
+        // test if ok
+        assertEquals("List size is wrong", 4, AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
+        assertEquals("Element 4 is wrong","Socks",AppModel.getInstance().getElementOfTheCurrentList(3));
         // delete all
         AppModel.getInstance().deleteAll();
     }

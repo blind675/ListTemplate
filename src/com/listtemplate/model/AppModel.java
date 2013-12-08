@@ -1,12 +1,13 @@
 package com.listtemplate.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Bitmap;
-import com.listtemplate.model.database.DBController;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
 import com.listtemplate.model.data.type.TemplateRecord;
+import com.listtemplate.model.database.DBController;
+import com.listtemplate.model.server.WSController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -66,7 +67,70 @@ public class AppModel {
        DBController.deleteAll();
     }
 
-    //************************************* USING TEMPLATES PART ************************************************//
+    //***************************************** TEMPLATES PART ***************************************************//
+
+    /**
+     * Save the template to the template list and database.
+     * If template with same elements present do nothing.
+     * @param templateRecord the record to save
+     */
+    public void saveTemplate(TemplateRecord templateRecord){
+        // run trough mTemplates
+        int j,k, numberOfMatchingElements;
+        for(int i=0; i <= mTemplates.size(); i++){
+            // see if they have the same number of elements
+            numberOfMatchingElements = 0;
+            if(mTemplates.get(i).getNumberOfElements() == templateRecord.getNumberOfElements()){
+                // run trough the elements and see if they repeat
+                for (j=0; j<= templateRecord.getNumberOfElements(); j++){
+                    for(k=0;k <= templateRecord.getNumberOfElements();k++){
+                        if(templateRecord.getElement(k).equals(mTemplates.get(i).getElement(j))){
+                            numberOfMatchingElements ++;
+                        }
+                    }
+                    // if times of element list go trough is different than number of elements that match
+                    // jump to the next
+                    if (j != numberOfMatchingElements) {
+                        break;
+                    }
+                }
+
+                // if all elements match get out
+                if(numberOfMatchingElements == templateRecord.getNumberOfElements()){
+                    return;
+                }
+            }
+        }
+
+        // if is shared active get unique id
+        if(templateRecord.getSharedDate() != null){
+            templateRecord.setId(WSController.getTemplateID());
+        }
+        // add template
+        mTemplates.add(templateRecord);
+
+        // if share enabled
+        if(templateRecord.getSharedDate() != null){
+            // do a server sync
+            WSController.doSync(mTemplates);
+            // update all database
+            DBController.updateTemplates(mTemplates);
+        } else{
+            // just write last to DB
+            DBController.writeTemplate(templateRecord);
+        }
+
+    }
+
+    /**
+     * Get the number of existing templates
+     * @return number of existing templates
+     */
+    public int getNumberOfTemplates(){
+        // return the size of mTemplates list
+        return mTemplates.size();
+
+    }
 
     //**************************************** USING LIST PART ***************************************************//
 
@@ -134,11 +198,25 @@ public class AppModel {
     }
 
     //*************************************** CREATING LIST PART **************************************************//
+
+    /**
+     * Create a new list from a template referenced by index
+     * Add the list to the back of the mOpenLists list.
+     * @param index the index of the template to use
+     */
     public void createListFromTemplate(int index){
         // create thumbnail from template background
-        // create a list from template index + thumbnail (use CreateList method)
+        // create a list from template index + thumbnail
         // add it to the back of the mOpenLists
-        // set mIndexOfTheCurrentlyOpenedList to last position
+        // set mIndexOfTheCurrentlyOpenedList to last position (use CreateList method)
+        createList(
+            mTemplates.get(index).getName(),
+            mTemplates.get(index).getDescription(),
+            mTemplates.get(index).getBackground());
+        // add the elements from the templates
+        for (int i=0;i <= mTemplates.get(index).getNumberOfElements();i++){
+            addElementToTheCurrentList(mTemplates.get(index).getElement(i));
+        }
     }
 
     /**

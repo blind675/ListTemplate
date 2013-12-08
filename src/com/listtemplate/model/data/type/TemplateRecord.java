@@ -33,8 +33,8 @@ public class TemplateRecord {
     /**
      * Constructor used to load data from the database or the server response
      */
-    public TemplateRecord(int usageIncrement,String name, String description, int rating,int usedPersonal, int usedAll, String author,
-                          String authorEmail, boolean sendEmail, Date sharedDate, Bitmap background) {
+    public TemplateRecord(int usageIncrement,String name, String description, int rating,int usedPersonal, int usedAll,
+                          String author, String authorEmail, boolean sendEmail, Date sharedDate, Bitmap background) {
 
         mUsageIncrement = usageIncrement;
         mName = name;

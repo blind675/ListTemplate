@@ -1,7 +1,6 @@
 package com.listtemplate.model.data.type;
 
 import android.test.AndroidTestCase;
-import com.listtemplate.model.data.type.CurrentlyUsedList;
 
 /**
  * Created with IntelliJ IDEA.
