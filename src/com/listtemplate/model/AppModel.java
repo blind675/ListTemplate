@@ -154,47 +154,80 @@ public class AppModel {
 
     /**
      * Get the name of the list referenced by mIndexOfTheCurrentlyOpenedList
+     * if no list is opened return null
      * @return name of the list
      */
     public String getNameOfTheCurrentList(){
-        return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getName();
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getName();
+        } else {
+            return null;
+        }
     }
 
     /**
      * Get the description of the list referenced by mIndexOfTheCurrentlyOpenedList
+     * If no list is opened return null
      * @return description of the list
      */
     public String getDescriptionOfTheCurrentList(){
-        return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getDescription();
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getDescription();
+        } else {
+            return null;
+        }
     }
 
     /**
      * Get the number of elements of the list referenced by mIndexOfTheCurrentlyOpenedList
+     * If no list is opened return 0
      * @return number of elements of the list
      */
     public int getNumberOfElementsOfTheCurrentList(){
-        return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getNumberOfElements();
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getNumberOfElements();
+        } else {
+            return 0;
+        }
     }
 
     /**
      * Get the element of the list referenced by mIndexOfTheCurrentlyOpenedList at the position index
+     * If no list is opened return null
      * @param index the position of the element
      * @return the name of the element
      */
     public String getElementOfTheCurrentList(int index){
         // get the element with the index of the mIndexOfTheCurrentlyOpenedList list in mOpenedLists
-        return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getElement(index);
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getElement(index);
+        } else {
+            return null;
+        }
     }
 
     /**
      * Check if the state of the element given by name in the list referenced by mIndexOfTheCurrentlyOpenedList
      * is selected or not
+     * If no list is opened return false
      * @param elementName the name of the element
      * @return if the element is selected or not
      */
     public boolean isElementSelected(String elementName){
         // get the selected state element of the mIndexOfTheCurrentlyOpenedList list in mOpenedLists
-        return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).isItemSelected(elementName);
+        return mIndexOfTheCurrentlyOpenedList != -1 && mOpenLists.get(mIndexOfTheCurrentlyOpenedList).isItemSelected(elementName);
+    }
+
+    /**
+     * Change the internal state of the element in the list referenced by mIndexOfTheCurrentlyOpenedList(currently opened list)
+     * Does not change the database value
+     * If no list is opened do nothing
+     * @param element the element whose selected state changes
+     */
+    public void toggleSelectedForElement(String element){
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            mOpenLists.get(mIndexOfTheCurrentlyOpenedList).toggleElementSelected(element);
+        }
     }
 
     //*************************************** CREATING LIST PART **************************************************//
@@ -239,9 +272,9 @@ public class AppModel {
 
     /**
      * Write the list referenced by mIndexOfTheCurrentlyOpenedList to the database.
-     * If object already in DB d nothing
+     * If object already in database do nothing
      */
-    public void useList() {
+    public void saveList() {
         DBController.writeList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList));
     }
 

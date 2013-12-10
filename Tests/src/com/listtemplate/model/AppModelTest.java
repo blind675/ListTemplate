@@ -47,9 +47,9 @@ public class AppModelTest extends AndroidTestCase {
         assertEquals("Element 3 is wrong","Shirt",AppModel.getInstance().getElementOfTheCurrentList(1));
         assertEquals("Selected state of element \"Shirt\" is wrong",false,AppModel.getInstance().isElementSelected("Shirt"));
         // use it / save it to database
-        AppModel.getInstance().useList();
+        AppModel.getInstance().saveList();
         // the second call should have no effect
-        AppModel.getInstance().useList();
+        AppModel.getInstance().saveList();
         // clear all singleton fields
         AppModel.getInstance().clearAll();
         assertEquals("Number of lists is wrong",0, AppModel.getInstance().getNumberOfLists());
@@ -120,6 +120,27 @@ public class AppModelTest extends AndroidTestCase {
         // test if ok
         assertEquals("List size is wrong", 4, AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
         assertEquals("Element 4 is wrong","Socks",AppModel.getInstance().getElementOfTheCurrentList(3));
+        // delete all
+        AppModel.getInstance().deleteAll();
+    }
+
+    public void testUseList(){
+        // create a list with name,description
+        AppModel.getInstance().createList("Test List","This is a test list.",null);
+        // add elements to it
+        AppModel.getInstance().addElementToTheCurrentList("Pants");
+        AppModel.getInstance().addElementToTheCurrentList("Socks");
+        AppModel.getInstance().addElementToTheCurrentList("Shirt");
+        // check the selected state of an element
+        assertEquals("Selected state of element \"Shirt\" is wrong",false,AppModel.getInstance().isElementSelected("Shirt"));
+        // change the state
+        AppModel.getInstance().toggleSelectedForElement("Shirt");
+        // check again
+        assertEquals("Selected state of element \"Shirt\" is wrong",true,AppModel.getInstance().isElementSelected("Shirt"));
+        // change the state
+        AppModel.getInstance().toggleSelectedForElement("Shirt");
+        // check again
+        assertEquals("Selected state of element \"Shirt\" is wrong",false,AppModel.getInstance().isElementSelected("Shirt"));
         // delete all
         AppModel.getInstance().deleteAll();
     }
