@@ -1,6 +1,5 @@
 package com.listtemplate.model.data.type;
 
-import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,13 +27,13 @@ public class TemplateRecord {
     private Date mSharedDate;
     private final ArrayList<String> mElements = new ArrayList<String>();
     private final ArrayList<String> mTags = new ArrayList<String>();
-    private final Bitmap mBackground;
+    private final byte[] mBackground;
 
     /**
      * Constructor used to load data from the database or the server response
      */
     public TemplateRecord(int usageIncrement,String name, String description, int rating,int usedPersonal, int usedAll,
-                          String author, String authorEmail, boolean sendEmail, Date sharedDate, Bitmap background) {
+                          String author, String authorEmail, boolean sendEmail, Date sharedDate, byte[] background) {
 
         mUsageIncrement = usageIncrement;
         mName = name;
@@ -54,7 +53,7 @@ public class TemplateRecord {
      */
 
     public TemplateRecord(String name, String description, String author, String authorEmail,
-                          boolean sendEmail, Bitmap background) {
+                          boolean sendEmail, byte[] background) {
         this(0,name,description,0,0,0,author,authorEmail,sendEmail,null,background);
     }
 
@@ -102,7 +101,7 @@ public class TemplateRecord {
         return mSharedDate;
     }
 
-    public Bitmap getBackground() {
+    public byte[] getBackground() {
         return mBackground;
     }
 

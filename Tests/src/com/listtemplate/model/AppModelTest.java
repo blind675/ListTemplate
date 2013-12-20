@@ -47,20 +47,20 @@ public class AppModelTest extends AndroidTestCase {
         assertEquals("Element 3 is wrong","Shirt",AppModel.getInstance().getElementOfTheCurrentList(1));
         assertEquals("Selected state of element \"Shirt\" is wrong",false,AppModel.getInstance().isElementSelected("Shirt"));
         // use it / save it to database
-        AppModel.getInstance().saveList();
+        AppModel.getInstance().saveList(getContext());
         // the second call should have no effect
-        AppModel.getInstance().saveList();
+        AppModel.getInstance().saveList(getContext());
         // clear all singleton fields
         AppModel.getInstance().clearAll();
         assertEquals("Number of lists is wrong",0, AppModel.getInstance().getNumberOfLists());
         // load database
-        AppModel.getInstance().loadLists();
+        AppModel.getInstance().loadLists(getContext());
         // see list is loaded correctly
         assertEquals("Number of lists is wrong",1, AppModel.getInstance().getNumberOfLists());
         // open the list first
         AppModel.getInstance().openList(0);
         // erase list and remove from database if present
-        AppModel.getInstance().discardList();
+        AppModel.getInstance().discardList(getContext());
         // see if removed correctly
         assertEquals("Number of lists is wrong",0, AppModel.getInstance().getNumberOfLists());
         // delete all
@@ -86,7 +86,7 @@ public class AppModelTest extends AndroidTestCase {
         // test if empty
         assertEquals("Not empty",0,AppModel.getInstance().getNumberOfTemplates());
         // load template from DB
-        AppModel.getInstance().loadTemplates();
+        AppModel.getInstance().loadTemplates(getContext());
         // test if ok
         assertEquals("Not loaded",1,AppModel.getInstance().getNumberOfTemplates());
         // delete all

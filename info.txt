@@ -1,0 +1,39 @@
+database structure
+
+table name: templates
+
+1. key varchar(30)id
+2. id int
+3. used_increment int
+4. name varchar(20)
+5. rating int
+6. description varchar(400)
+7. used_personal int
+8. used_all int
+9. author varchar(50)
+10. author_email varchar(100)
+11. send_mail bit
+12. shared_date date
+13. elements varchar(2000)
+14. tags varchar(500)
+15. picture image
+
+example of a record: 32, Name of List, 3, bla bla, 4, 341, ion, ion@ion.com, 0, 20-02-1023;Shirt,Coat,Pants,Suit,Ball,Sun screen;sea side,summer
+
+
+table name: lists
+
+name varchar(20)
+description varchar(200)
+elements varchar(2500)
+selected varchar(500)
+picture image
+thumbnail image
+
+example of a record: Name of List;Shirt,Coat,Pants,Suit,Ball,Sun screen;0,0,0,1,0,1
+
+
+local properties
+
+last_sync date       ex: '02-10-2011'
+not_synced string    ex: '3,6,12,43,2'

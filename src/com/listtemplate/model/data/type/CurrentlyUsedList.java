@@ -1,7 +1,5 @@
 package com.listtemplate.model.data.type;
 
-import android.graphics.Bitmap;
-
 import java.util.LinkedHashMap;
 
 /**
@@ -11,11 +9,12 @@ import java.util.LinkedHashMap;
 public class CurrentlyUsedList {
     private final String mName;
     private final String mDescription;
+    // really bad .. use 2 lists
     private final LinkedHashMap<String,Boolean> mElements = new LinkedHashMap<String, Boolean>();
-    private final Bitmap mBackground;
-    private final Bitmap mThumbnail;
+    private final byte[] mBackground;
+    private final byte[] mThumbnail;
 
-    public CurrentlyUsedList(String name, String description,Bitmap background, Bitmap thumbnail){
+    public CurrentlyUsedList(String name, String description,byte[] background, byte[] thumbnail){
         mName = name;
         mDescription = description;
         mBackground = background;
@@ -25,10 +24,9 @@ public class CurrentlyUsedList {
     /**
      * Add an element to the list, and it's state to the list
      * @param key element name
-     * @param isSelected selected or not
      */
-    public void addElement(String key,boolean isSelected){
-        mElements.put(key,isSelected);
+    public void addElement(String key){
+        mElements.put(key,false);
     }
 
     /**
@@ -55,11 +53,11 @@ public class CurrentlyUsedList {
         return mDescription;
     }
 
-    public Bitmap getBackground(){
+    public byte[] getBackground(){
         return mBackground;
     }
 
-    public Bitmap getThumbnail(){
+    public byte[] getThumbnail(){
         return mThumbnail;
     }
 

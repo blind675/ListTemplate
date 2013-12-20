@@ -1,9 +1,9 @@
 package com.listtemplate.model.database;
 
+import android.content.Context;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
 import com.listtemplate.model.data.type.TemplateRecord;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,18 +18,22 @@ public class DBController {
      * Remove the list from the database if present.
      * If not present do nothing.
      * @param listToRemove the list to be removed
+     * @param context the context
      */
-    public static void removeList(CurrentlyUsedList listToRemove) {
-        // TODO: implement method
+    public static void removeList(CurrentlyUsedList listToRemove, Context context) {
+        // delegate
+        ListController.removeList(listToRemove,context);
     }
 
     /**
      * Write the list to the database.
      * If present do nothing.
      * @param listToWrite the list to be written
+     * @param context the context
      */
-    public static void writeList(CurrentlyUsedList listToWrite){
-        // TODO: implement method
+    public static void writeList(CurrentlyUsedList listToWrite, Context context){
+        // delegate
+        ListController.writeList(listToWrite,context);
     }
 
     /**
@@ -40,22 +44,24 @@ public class DBController {
     public static void writeTemplate(TemplateRecord templateToWrite){
         // TODO: implement method
     }
+
     /**
      * Load all the lists from the database
+     * @param context the context
      * @return list of the lists :)
      */
-    public static List<CurrentlyUsedList> loadLists(){
-        // TODO: implement method
-        return new ArrayList<CurrentlyUsedList>();
+    public static List<CurrentlyUsedList> loadLists(Context context){
+        // delegate
+        return ListController.loadLists(context);
     }
 
     /**
      * Load all templates from the database
-     * @return
+     * @param context the context
+     * @return list of the templates :)
      */
-    public static List<TemplateRecord> loadTemplates() {
-       // TODO: implement method
-       return new ArrayList<TemplateRecord>();
+    public static List<TemplateRecord> loadTemplates(Context context) {
+       return TemplateController.loadTemplates(context);
     }
 
     /**

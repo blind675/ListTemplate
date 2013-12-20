@@ -1,6 +1,6 @@
 package com.listtemplate.model;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
 import com.listtemplate.model.data.type.TemplateRecord;
 import com.listtemplate.model.database.DBController;
@@ -28,17 +28,18 @@ public class AppModel {
 
     private AppModel() {
         // load everything
-        loadLists();
-        loadTemplates();
+        // loadLists();
+        // loadTemplates();
     }
 
     /**
      * Load all the lists from the database
+     * @param context the context
      */
-    public void loadLists() {
+    public void loadLists(Context context) {
         // load all the lists
         // overwrite the existing ones
-        mOpenLists = DBController.loadLists();
+        mOpenLists = DBController.loadLists(context);
         // set the open list index to initial value
         // no list is opened
         mIndexOfTheCurrentlyOpenedList = -1;
@@ -46,11 +47,12 @@ public class AppModel {
 
     /**
      * Load all the templates from the database
+     * @param context the context
      */
-    public void loadTemplates() {
+    public void loadTemplates(Context context) {
         // load all the templates
         // overwrite the existing ones
-        mTemplates = DBController.loadTemplates();
+        mTemplates = DBController.loadTemplates(context);
     }
 
     //**************************************** TESTING UTILS *****************************************************//
@@ -258,10 +260,10 @@ public class AppModel {
      * @param name name of the list
      * @param background background of the list
      */
-    public void createList(String name, String description, Bitmap background) {
+    public void createList(String name, String description, byte[] background) {
         // create thumbnail from background
         //TODO: utilities method that generates a thumbnail
-        Bitmap thumbnail = null;
+        byte[] thumbnail = null;
         // create a list with name,description,background + thumbnail
         CurrentlyUsedList newList = new CurrentlyUsedList(name,description,background,thumbnail);
         // add it to the back of the mOpenLists
@@ -273,18 +275,20 @@ public class AppModel {
     /**
      * Write the list referenced by mIndexOfTheCurrentlyOpenedList to the database.
      * If object already in database do nothing
+     * @param context the context
      */
-    public void saveList() {
-        DBController.writeList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList));
+    public void saveList(Context context) {
+        DBController.writeList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList),context);
     }
 
     /**
      * Remove list referenced by mIndexOfTheCurrentlyOpenedList
      * Also remove from database if present
+     * @param context the context
      */
-    public void discardList() {
+    public void discardList(Context context) {
         // remove list from database
-        DBController.removeList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList));
+        DBController.removeList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList),context);
         // remove last record of mOpenLists
         mOpenLists.remove(mIndexOfTheCurrentlyOpenedList);
     }
@@ -296,7 +300,9 @@ public class AppModel {
     public void addElementToTheCurrentList(String elementName){
         // add an element
         // since is a new element is never selected (isSelected  = false)
-        mOpenLists.get(mIndexOfTheCurrentlyOpenedList).addElement(elementName,false);
+        mOpenLists.get(mIndexOfTheCurrentlyOpenedList).addElement(elementName);
+        // this is done implicitly
+        // mOpenLists.get(mIndexOfTheCurrentlyOpenedList).setElementSelected(elementName,false);
     }
 
     /**
