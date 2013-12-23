@@ -52,17 +52,17 @@ public class ListController {
         while (!cursor.isAfterLast()) {
 
             // get the name of the list
-            String name = cursor.getString(1);
+            String name = cursor.getString(0);
             // get the description of the list
-            String description = cursor.getString(2);
+            String description = cursor.getString(1);
             // get the element string
-            String elements = cursor.getString(3);
+            String elements = cursor.getString(2);
             // get the selected string
-            String selected = cursor.getString(4);
+            String selected = cursor.getString(3);
             // get the picture of the list
-            byte[] picture = cursor.getBlob(5);
+            byte[] picture = cursor.getBlob(4);
             // get the thumbnail of the list
-            byte[] thumbnail = cursor.getBlob(6);
+            byte[] thumbnail = cursor.getBlob(5);
 
             CurrentlyUsedList listRecord = new CurrentlyUsedList(name,description,picture,thumbnail);
 
@@ -101,16 +101,16 @@ public class ListController {
             mDbHelper = new SQLListHelper(context);
             mDatabase = mDbHelper.getWritableDatabase();
         }
-
-        // TODO: test if already in
+        // test if already in database
+        // this is done implicitly by making name a unique key
+        // no 2 same keys can be the same (unique)
 
         ContentValues values = new ContentValues();
         values.put(SQLListHelper.COLUMN_NAME,listToWrite.getName());
         values.put(SQLListHelper.COLUMN_DESCRIPTION,listToWrite.getDescription());
 
-        // TODO: generate elements and selected
-        values.put(SQLListHelper.COLUMN_ELEMENTS,"IN");
-        values.put(SQLListHelper.COLUMN_SELECTED,"IN");
+        values.put(SQLListHelper.COLUMN_ELEMENTS,listToWrite.getElementsString());
+        values.put(SQLListHelper.COLUMN_SELECTED,listToWrite.getSelectedString());
 
         values.put(SQLListHelper.COLUMN_PICTURE,listToWrite.getBackground());
         values.put(SQLListHelper.COLUMN_THUMB,listToWrite.getThumbnail());
@@ -133,6 +133,6 @@ public class ListController {
         }
 
         mDatabase.delete(SQLListHelper.TABLE_LISTS,
-                SQLListHelper.COLUMN_NAME + " = \'" + listToRemove.getName(), null);
+                SQLListHelper.COLUMN_NAME + " = \'" + listToRemove.getName() + "\'", null);
     }
 }

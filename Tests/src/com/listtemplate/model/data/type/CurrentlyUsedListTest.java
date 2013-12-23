@@ -24,9 +24,10 @@ public class CurrentlyUsedListTest extends AndroidTestCase {
         assertNull("There is a first elements.",list.getElement(0));
 
         //add elements
-        list.addElement("Pants",false);
-        list.addElement("Shirt",false);
-        list.addElement("Sun screen",true);
+        list.addElement("Pants");
+        list.addElement("Shirt");
+        list.addElement("Sun screen");
+        list.setElementSelected("Sun screen",true);
 
         //test if elements were added correctly
         assertEquals("The number of elements is wrong",3,list.getNumberOfElements());

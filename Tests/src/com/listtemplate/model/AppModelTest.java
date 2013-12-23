@@ -59,6 +59,10 @@ public class AppModelTest extends AndroidTestCase {
         assertEquals("Number of lists is wrong",1, AppModel.getInstance().getNumberOfLists());
         // open the list first
         AppModel.getInstance().openList(0);
+        // see it's correct
+        assertEquals("List size is wrong",4,AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
+        assertEquals("Element 3 is wrong","Shirt",AppModel.getInstance().getElementOfTheCurrentList(1));
+        assertEquals("Selected state of element \"Shirt\" is wrong",false,AppModel.getInstance().isElementSelected("Shirt"));
         // erase list and remove from database if present
         AppModel.getInstance().discardList(getContext());
         // see if removed correctly
@@ -118,8 +122,8 @@ public class AppModelTest extends AndroidTestCase {
         // remove element
         AppModel.getInstance().removeElementFromTheCurrentList("Shirt");
         // test if ok
-        assertEquals("List size is wrong", 4, AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
-        assertEquals("Element 4 is wrong","Socks",AppModel.getInstance().getElementOfTheCurrentList(3));
+        assertEquals("List size is wrong", 3, AppModel.getInstance().getNumberOfElementsOfTheCurrentList());
+        assertEquals("Element 2 is wrong","Sun screen",AppModel.getInstance().getElementOfTheCurrentList(1));
         // delete all
         AppModel.getInstance().deleteAll();
     }

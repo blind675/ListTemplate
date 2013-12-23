@@ -117,4 +117,28 @@ public class CurrentlyUsedList {
     public void toggleElementSelected(String key){
         mElements.put(key,!isItemSelected(key));
     }
+
+    /**
+     * Generates an elements name string used for database storing
+     * @return generated string
+     */
+    public String getElementsString(){
+        String returnString = "";
+        for (String element : mElements.keySet()) {
+            returnString += element + ",";
+        }
+        return returnString;
+    }
+
+    /**
+     * Generates an elements selected state string used for database storing
+     * @return generated string
+     */
+    public String getSelectedString(){
+        String returnString = "";
+        for (String element : mElements.keySet()) {
+            returnString += (isItemSelected(element))?"1":"0" + ",";
+        }
+        return returnString;
+    }
 }

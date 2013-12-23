@@ -79,7 +79,7 @@ public class AppModel {
     public void saveTemplate(TemplateRecord templateRecord){
         // run trough mTemplates
         int j,k, numberOfMatchingElements;
-        for(int i=0; i <= mTemplates.size(); i++){
+        for(int i=0; i < mTemplates.size(); i++){
             // see if they have the same number of elements
             numberOfMatchingElements = 0;
             if(mTemplates.get(i).getNumberOfElements() == templateRecord.getNumberOfElements()){
@@ -249,7 +249,7 @@ public class AppModel {
             mTemplates.get(index).getDescription(),
             mTemplates.get(index).getBackground());
         // add the elements from the templates
-        for (int i=0;i <= mTemplates.get(index).getNumberOfElements();i++){
+        for (int i=0;i < mTemplates.get(index).getNumberOfElements();i++){
             addElementToTheCurrentList(mTemplates.get(index).getElement(i));
         }
     }

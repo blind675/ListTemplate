@@ -7,6 +7,7 @@ import com.listtemplate.model.data.type.TemplateRecord;
 import com.listtemplate.model.database.SQLconnector.SQLTemplateHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,42 +56,59 @@ public class TemplateController {
         while (!cursor.isAfterLast()) {
 
             // get the key of the list
-            String key = cursor.getString(1);
+            String key = cursor.getString(0);
             // get the id of the list
-            int id = cursor.getInt(2);
+            int id = cursor.getInt(1);
             // get the used_increment of the list
-            int used_increment = cursor.getInt(3);
+            int used_increment = cursor.getInt(2);
             // get the name of the list
-            String name = cursor.getString(4);
+            String name = cursor.getString(3);
             // get the rating of the list
-            int rating = cursor.getInt(5);
+            int rating = cursor.getInt(4);
             // get the description of the list
-            String description = cursor.getString(6);
+            String description = cursor.getString(5);
             // get the used_personal of the list
-            int used_personal = cursor.getInt(7);
+            int used_personal = cursor.getInt(6);
             // get the used_all of the list
-            int used_all = cursor.getInt(8);
+            int used_all = cursor.getInt(7);
             // get the author string
-            String author = cursor.getString(9);
+            String author = cursor.getString(8);
             // get the author_email string
-            String author_email = cursor.getString(10);
+            String author_email = cursor.getString(9);
             // get the send_mail of the list
-            short send_mail = cursor.getShort(11);
+            short send_mail = cursor.getShort(10);
             // get the shared_date of the list
-            //Date shared_date = cursor.getString(12);
+            Date shared_date = new Date(cursor.getString(12).toString());
             // get the element string
-            String elements = cursor.getString(13);
+            String elements = cursor.getString(12);
             // get the tags string
-            String tags = cursor.getString(14);
+            String tags = cursor.getString(13);
             // get the picture of the list
-            byte[] picture = cursor.getBlob(15);
+            byte[] picture = cursor.getBlob(14);
 
-            //TemplateRecord templateRecord = new TemplateRecord();
+            TemplateRecord templateRecord = new TemplateRecord(used_increment,name,description,rating,used_personal,used_all,author,author_email,(send_mail==1)?true:false,shared_date,picture);
+            templateRecord.setId(id);
 
+            String[] elementsList = elements.split(",");
+            String[] tagsList = tags.split(",");
+
+            for(String element: elementsList ){
+                templateRecord.addElement(element);
+            }
+
+            for(String tag: tagsList ){
+                templateRecord.addTag(tag);
+            }
+
+            returnTemplateList.add(templateRecord);
+            cursor.moveToNext();
 
         }
 
-        return returnTemplateList;
+        // make sure to close the cursor
+        cursor.close();
 
+        return returnTemplateList;
     }
+
 }
