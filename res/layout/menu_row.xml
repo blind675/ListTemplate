@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="240dp"
+    android:layout_height="45dp"
+    android:background="?android:attr/activatedBackgroundIndicator">
+
+    <!-- row based on simple_list_item_1 from Android -->
+    <ImageView android:id="@+id/menuIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:padding="3dp"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:src="@drawable/home"
+        android:contentDescription="@string/menuIcon"/>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="150dp"
+        android:layout_height="45dp">
+        <TextView
+            android:id="@+id/menuTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical|left"
+            android:paddingRight="5dp"
+            android:textColor="#000000"
+            android:minHeight="14dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/menuDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="16dp"
+            android:layout_gravity="top"
+            android:paddingLeft="5dp"
+            android:gravity="top|left"
+            android:paddingRight="2dp"
+            android:textColor="#909090"
+            android:minHeight="12dp"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

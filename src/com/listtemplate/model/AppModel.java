@@ -79,15 +79,15 @@ public class AppModel {
     public void saveTemplate(TemplateRecord templateRecord){
         // run trough mTemplates
         int j,k, numberOfMatchingElements;
-        for(int i=0; i < mTemplates.size(); i++){
+        for (TemplateRecord mTemplate : mTemplates) {
             // see if they have the same number of elements
             numberOfMatchingElements = 0;
-            if(mTemplates.get(i).getNumberOfElements() == templateRecord.getNumberOfElements()){
+            if (mTemplate.getNumberOfElements() == templateRecord.getNumberOfElements()) {
                 // run trough the elements and see if they repeat
-                for (j=0; j<= templateRecord.getNumberOfElements(); j++){
-                    for(k=0;k <= templateRecord.getNumberOfElements();k++){
-                        if(templateRecord.getElement(k).equals(mTemplates.get(i).getElement(j))){
-                            numberOfMatchingElements ++;
+                for (j = 0; j <= templateRecord.getNumberOfElements(); j++) {
+                    for (k = 0; k <= templateRecord.getNumberOfElements(); k++) {
+                        if (templateRecord.getElement(k).equals(mTemplate.getElement(j))) {
+                            numberOfMatchingElements++;
                         }
                     }
                     // if times of element list go trough is different than number of elements that match
@@ -98,7 +98,7 @@ public class AppModel {
                 }
 
                 // if all elements match get out
-                if(numberOfMatchingElements == templateRecord.getNumberOfElements()){
+                if (numberOfMatchingElements == templateRecord.getNumberOfElements()) {
                     return;
                 }
             }

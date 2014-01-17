@@ -42,14 +42,13 @@ public class CurrentlyUsedListTest extends AndroidTestCase {
         assertEquals("The element on position 2 is wrong","Sun screen",list.getElement(1));
 
         //set the selected of an element
-        boolean selected = true;
-        list.setElementSelected("Shirt",selected);
+        list.setElementSelected("Shirt",true);
         //test if selected set correctly
-        assertEquals("Selected not set correctly",selected,list.isItemSelected("Shirt"));
+        assertEquals("Selected not set correctly",true,list.isItemSelected("Shirt"));
         //change that elements selected
         list.toggleElementSelected("Shirt");
         //test if done correctly
-        assertEquals("Selected not toggled correctly",!selected,list.isItemSelected("Shirt"));
+        assertEquals("Selected not toggled correctly",false,list.isItemSelected("Shirt"));
     }
 
 }

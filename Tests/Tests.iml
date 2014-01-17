@@ -17,6 +17,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ListTemplate" scope="PROVIDED" />
+    <orderEntry type="library" name="android-support-v4" level="project" />
   </component>
 </module>
 

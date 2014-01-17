@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ListTemplate</string>
+
+    <!-- drawer menu part-->
+    <string name="current_list">Current List</string>
+    <string name="home">Home</string>
+    <string name="browse_templates">Browse Templates</string>
+    <string name="create_template">Create Template</string>
+    <string name="settings">Settings</string>
+
+    <string name="drawer_open">Open menu</string>
+    <string name="drawer_close">Close menu</string>
+    <string name="menuIcon">icon</string>
+
+    <!-- home fragment part-->
+    <string name="voice_input">Voice input</string>
+
 </resources>

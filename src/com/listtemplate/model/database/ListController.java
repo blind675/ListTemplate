@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
-import com.listtemplate.model.database.SQLconnector.SQLListHelper;
+import com.listtemplate.model.database.SQLconnector.SQLDatabaseConnector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,16 @@ import java.util.List;
 public class ListController {
 
     private static final String[] mAllColumns = {
-            SQLListHelper.COLUMN_NAME,
-            SQLListHelper.COLUMN_DESCRIPTION,
-            SQLListHelper.COLUMN_ELEMENTS,
-            SQLListHelper.COLUMN_SELECTED,
-            SQLListHelper.COLUMN_PICTURE,
-            SQLListHelper.COLUMN_THUMB,
+            SQLDatabaseConnector.LISTS_COLUMN_NAME,
+            SQLDatabaseConnector.LISTS_COLUMN_DESCRIPTION,
+            SQLDatabaseConnector.LISTS_COLUMN_ELEMENTS,
+            SQLDatabaseConnector.LISTS_COLUMN_SELECTED,
+            SQLDatabaseConnector.LISTS_COLUMN_PICTURE,
+            SQLDatabaseConnector.LISTS_COLUMN_THUMB,
     };
 
     private static SQLiteDatabase mDatabase;
-    private static SQLListHelper mDbHelper;
+    private static SQLDatabaseConnector mDbHelper;
 
     /**
      * Load all the lists from the database
@@ -41,49 +41,54 @@ public class ListController {
 
         // lazy instantiating
         if (mDbHelper == null) {
-            mDbHelper = new SQLListHelper(context);
+            mDbHelper = new SQLDatabaseConnector(context);
             mDatabase = mDbHelper.getWritableDatabase();
         }
 
-        Cursor cursor = mDatabase.query(SQLListHelper.TABLE_LISTS, mAllColumns, null, null, null, null, null);
-
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()) {
-
-            // get the name of the list
-            String name = cursor.getString(0);
-            // get the description of the list
-            String description = cursor.getString(1);
-            // get the element string
-            String elements = cursor.getString(2);
-            // get the selected string
-            String selected = cursor.getString(3);
-            // get the picture of the list
-            byte[] picture = cursor.getBlob(4);
-            // get the thumbnail of the list
-            byte[] thumbnail = cursor.getBlob(5);
-
-            CurrentlyUsedList listRecord = new CurrentlyUsedList(name,description,picture,thumbnail);
-
-            String[] elementsList = elements.split(",");
-            String[] selectedList = selected.split(",");
-
-            for(String element: elementsList ){
-                listRecord.addElement(element);
-            }
-
-            int i=0;
-            for(String select: selectedList ){
-                listRecord.setElementSelected(listRecord.getElement(i), select.equals("1"));
-            }
-
-            returnList.add(listRecord);
-
-            cursor.moveToNext();
+        Cursor cursor = null;
+        if (mDatabase != null) {
+            cursor = mDatabase.query(SQLDatabaseConnector.TABLE_LISTS, mAllColumns, null, null, null, null, null);
         }
-        // make sure to close the cursor
-        cursor.close();
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+
+                // get the name of the list
+                String name = cursor.getString(0);
+                // get the description of the list
+                String description = cursor.getString(1);
+                // get the element string
+                String elements = cursor.getString(2);
+                // get the selected string
+                String selected = cursor.getString(3);
+                // get the picture of the list
+                byte[] picture = cursor.getBlob(4);
+                // get the thumbnail of the list
+                byte[] thumbnail = cursor.getBlob(5);
+
+                CurrentlyUsedList listRecord = new CurrentlyUsedList(name,description,picture,thumbnail);
+
+                String[] elementsList = elements.split(",");
+                String[] selectedList = selected.split(",");
+
+                for(String element: elementsList ){
+                    listRecord.addElement(element);
+                }
+
+                int i=0;
+                for(String select: selectedList ){
+                    listRecord.setElementSelected(listRecord.getElement(i), select.equals("1"));
+                }
+
+                returnList.add(listRecord);
+
+                cursor.moveToNext();
+            }
+            // make sure to close the cursor
+            cursor.close();
+        }
 
         return returnList;
     }
@@ -98,7 +103,7 @@ public class ListController {
 
         // lazy instantiating
         if (mDbHelper == null) {
-            mDbHelper = new SQLListHelper(context);
+            mDbHelper = new SQLDatabaseConnector(context);
             mDatabase = mDbHelper.getWritableDatabase();
         }
         // test if already in database
@@ -106,15 +111,15 @@ public class ListController {
         // no 2 same keys can be the same (unique)
 
         ContentValues values = new ContentValues();
-        values.put(SQLListHelper.COLUMN_NAME,listToWrite.getName());
-        values.put(SQLListHelper.COLUMN_DESCRIPTION,listToWrite.getDescription());
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_NAME,listToWrite.getName());
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_DESCRIPTION,listToWrite.getDescription());
 
-        values.put(SQLListHelper.COLUMN_ELEMENTS,listToWrite.getElementsString());
-        values.put(SQLListHelper.COLUMN_SELECTED,listToWrite.getSelectedString());
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_ELEMENTS,listToWrite.getElementsString());
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_SELECTED,listToWrite.getSelectedString());
 
-        values.put(SQLListHelper.COLUMN_PICTURE,listToWrite.getBackground());
-        values.put(SQLListHelper.COLUMN_THUMB,listToWrite.getThumbnail());
-        mDatabase.insert(SQLListHelper.TABLE_LISTS, null, values);
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_PICTURE,listToWrite.getBackground());
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_THUMB,listToWrite.getThumbnail());
+        mDatabase.insert(SQLDatabaseConnector.TABLE_LISTS, null, values);
 
     }
 
@@ -128,11 +133,11 @@ public class ListController {
 
         // lazy instantiating
         if (mDbHelper == null) {
-            mDbHelper = new SQLListHelper(context);
+            mDbHelper = new SQLDatabaseConnector(context);
             mDatabase = mDbHelper.getWritableDatabase();
         }
 
-        mDatabase.delete(SQLListHelper.TABLE_LISTS,
-                SQLListHelper.COLUMN_NAME + " = \'" + listToRemove.getName() + "\'", null);
+        mDatabase.delete(SQLDatabaseConnector.TABLE_LISTS,
+                SQLDatabaseConnector.LISTS_COLUMN_NAME + " = \'" + listToRemove.getName() + "\'", null);
     }
 }

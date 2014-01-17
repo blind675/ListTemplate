@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="menu_items">
+        <item>@string/current_list</item>
+        <item>@string/home</item>
+        <item>@string/browse_templates</item>
+        <item>@string/create_template</item>
+        <item>@string/settings</item>
+    </string-array>
+
+    <!-- TODO: fill with pictures -->
+    <string-array name="menu_images">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+    </string-array>
+
+    <!-- TODO: fill with descriptions-->
+    <string-array name="menu_description">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+    </string-array>
+
+</resources>
