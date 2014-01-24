@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="80dp"
+              android:background="@color/white"
+              android:baselineAligned="false">
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="3dp"
+        android:background="@drawable/list_create_border"
+        android:id="@+id/createFromList">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/create_from_list"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:id="@+id/createFromListImage"
+            android:contentDescription="@string/create_list_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/createFromListImage"
+            android:text="@string/create_new_list"
+            android:textColor="@color/textGray"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="3dp"
+        android:background="@drawable/list_create_border"
+        android:id="@+id/createFromTemplate">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/create_from_template"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:id="@+id/createFromTemplateImage"
+            android:contentDescription="@string/create_from_template_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/createFromTemplateImage"
+            android:text="@string/use_template"
+            android:textColor="@color/textGray"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+</LinearLayout>

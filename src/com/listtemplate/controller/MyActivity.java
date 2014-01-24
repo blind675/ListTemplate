@@ -192,14 +192,6 @@ public class MyActivity extends FragmentActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    /* The click listener for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
     /**
      * Called when you press the Back button.
      * First go to the home fragment, after suspend the application.
@@ -212,6 +204,14 @@ public class MyActivity extends FragmentActivity {
         } else {
             super.onBackPressed();
             // dispatch the event
+        }
+    }
+
+    /* The click listener for ListView in the navigation drawer */
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
         }
     }
 

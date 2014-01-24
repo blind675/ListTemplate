@@ -137,6 +137,15 @@ public class AppModel {
     //**************************************** USING LIST PART ***************************************************//
 
     /**
+     * Get the currently used lists array
+     * @return the opened lists array
+     */
+    public List<CurrentlyUsedList> getOpenedLists(){
+        // return the lists array
+        return mOpenLists;
+    }
+
+    /**
      * Get the number of existing lists
      * @return number of existing lists
      */

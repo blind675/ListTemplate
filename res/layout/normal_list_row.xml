@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="80dp"
+              android:background="@color/white">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/thumbnailView"
+        android:src="@drawable/mountain"
+        android:scaleType="centerCrop"
+        android:background="@color/white"
+        android:alpha="0.2"
+        android:contentDescription="@string/thumbnail_photo"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:id="@+id/listImageView">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="@string/exampleTitle"
+                android:id="@+id/listTitle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/listStarted"
+                android:text="@string/exampleStartedOn"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="9dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:id="@+id/listDescription"
+            android:text="@string/exampleDescription"
+            android:textColor="@color/textGray"
+            android:textSize="12sp"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>
