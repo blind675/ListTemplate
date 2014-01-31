@@ -1,6 +1,7 @@
 package com.listtemplate.model;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
 import com.listtemplate.model.data.type.TemplateRecord;
 import com.listtemplate.model.database.DBController;
@@ -184,6 +185,19 @@ public class AppModel {
     public String getDescriptionOfTheCurrentList(){
         if(mIndexOfTheCurrentlyOpenedList != -1){
             return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getDescription();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Get the background image for the list referenced by mIndexOfTheCurrentlyOpenedList
+     * If no list is opened return null
+     * @return background image of the list
+     */
+    public byte[] getBackgroundImageOfTheCurrentList(){
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getBackground();
         } else {
             return null;
         }

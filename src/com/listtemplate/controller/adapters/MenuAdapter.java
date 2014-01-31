@@ -28,7 +28,7 @@ public class MenuAdapter extends ArrayAdapter<String> {
 
     // create a constructor for my menu adapter
     public MenuAdapter(Context context, String[] titles, String[] descriptions, TypedArray iconNames ) {
-        super(context, R.layout.menu_row, titles);
+        super(context, R.layout.row_menu, titles);
         mTitles = titles;
         mDescriptions = descriptions;
         mIconNames = iconNames;
@@ -42,7 +42,7 @@ public class MenuAdapter extends ArrayAdapter<String> {
         // use the covertView if it is provided
          if(convertView == null){
              // inflate the layout XML for row
-             convertView = mInflated.inflate(R.layout.menu_row, parent, false);
+             convertView = mInflated.inflate(R.layout.row_menu, parent, false);
          }
 
         // add the elements to the menu row

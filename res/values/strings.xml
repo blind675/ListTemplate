@@ -27,5 +27,6 @@
     <string name="exampleDescription">Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis lobortis ornare. Morbi tempor non orci et accumsan. Proin laoreet.</string>
     <string name="create_list_icon">create list icon</string>
     <string name="create_from_template_icon">create list from template</string>
+    <string name="element"> Element</string>
 
 </resources>
