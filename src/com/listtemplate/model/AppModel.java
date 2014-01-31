@@ -56,6 +56,9 @@ public class AppModel {
         mTemplates = DBController.loadTemplates(context);
     }
 
+    //When I wrote this, only God and I understood what I was doing
+    //Now, God only knows
+
     //**************************************** TESTING UTILS *****************************************************//
     // Clear singleton fields
     public void clearAll(){
@@ -163,6 +166,15 @@ public class AppModel {
         // set mIndexOfTheCurrentlyOpenedList
         mIndexOfTheCurrentlyOpenedList = index;
     }
+
+    /**
+     * Close the list by setting the mIndexOfTheCurrentlyOpenedList to -1. No argument.
+     */
+    public void closeCurrentlyOpenList(){
+        mIndexOfTheCurrentlyOpenedList = -1;
+    }
+
+    // A dyslexic man walks in to a bra.
 
     /**
      * Get the name of the list referenced by mIndexOfTheCurrentlyOpenedList

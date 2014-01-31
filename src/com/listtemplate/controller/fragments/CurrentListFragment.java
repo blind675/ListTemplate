@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.listtemplate.R;
-import com.listtemplate.controller.adapters.HomeListAdapter;
+import com.listtemplate.controller.adapters.CurrentListAdapter;
 import com.listtemplate.model.AppModel;
 
 /**
@@ -46,9 +46,11 @@ public class CurrentListFragment extends Fragment {
         ListView listView = (ListView) currentListView.findViewById(R.id.listView);
 
         // Create a custom adapter
-        //mAdapter = new HomeListAdapter(getActivity().getApplicationContext(), AppModel.getInstance().getOpenedLists());
+        CurrentListAdapter adapter = new CurrentListAdapter(getActivity().getApplicationContext(),R.id.checkBox);
         // Set the custom adapter
-        //listView.setAdapter(mAdapter);
+        listView.setAdapter(adapter);
+
+        // return the fragment
         return currentListView;
     }
 
@@ -57,4 +59,13 @@ public class CurrentListFragment extends Fragment {
         super.onResume();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Save the state of the currently opened list in the database
+        AppModel.getInstance().saveList(getActivity().getApplicationContext());
+        // Set the currently opened list to none
+        AppModel.getInstance().closeCurrentlyOpenList();
+    }
 }

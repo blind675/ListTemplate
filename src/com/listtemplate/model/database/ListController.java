@@ -30,6 +30,8 @@ public class ListController {
     private static SQLiteDatabase mDatabase;
     private static SQLDatabaseConnector mDbHelper;
 
+    /////////////////////////////////////// this is a well commented line
+
     /**
      * Load all the lists from the database
      * @param context the context

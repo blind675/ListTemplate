@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class WSController {
 
+    // no comments for you
+    // it was hard to write
+    // so it should be hard to read
+
+    // just kidding
     /**
      * Get an unique id form server
      * @return unique id
