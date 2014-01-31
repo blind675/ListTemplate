@@ -64,7 +64,8 @@ public class HomeListAdapter extends ArrayAdapter<CurrentlyUsedList>{
             final RelativeLayout createFromTemplateLayout = (RelativeLayout)convertView.findViewById(R.id.createFromTemplate);
 
             // set event listeners
-            // TODO: i assume this will fire before the row click event
+            //I assume this will fire before the row click event
+            //It does
             createListLayout.setOnTouchListener(new RelativeLayout.OnTouchListener() {
 
                 // create mechanism for highlighting .. non provided for items in the rows,
@@ -73,11 +74,13 @@ public class HomeListAdapter extends ArrayAdapter<CurrentlyUsedList>{
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     createListLayout.setBackgroundColor(mContext.getResources().getColor(R.color.aqua));
                     mCreateOption = 1;
+                    // return false because i want the event to be captured again
                     return false;
                 }
 
             });
-            // TODO: i assume this will fire before the row click event
+            //I assume this will fire before the row click event
+            //It does
             createFromTemplateLayout.setOnTouchListener(new RelativeLayout.OnTouchListener() {
 
                 // create mechanism for highlighting .. non provided for items in the rows,
@@ -86,6 +89,7 @@ public class HomeListAdapter extends ArrayAdapter<CurrentlyUsedList>{
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     createFromTemplateLayout.setBackgroundColor(mContext.getResources().getColor(R.color.aqua));
                     mCreateOption = 2;
+                    // return false because i want the event to be captured again
                     return false;
                 }
             });

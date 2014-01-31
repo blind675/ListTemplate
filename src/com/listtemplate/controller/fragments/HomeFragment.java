@@ -16,6 +16,7 @@ import com.listtemplate.model.AppModel;
 
 /**
  * Created by Catalin BORA on 1/17/14.
+ *
  */
 public class HomeFragment extends Fragment{
 
@@ -53,7 +54,7 @@ public class HomeFragment extends Fragment{
     private class ListItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.w(HomeFragment.class.getName()," pos:"+position+" the id:"+id+" selected option:" + mAdapter.getSelectedOption());
+            Log.i(HomeFragment.class.getName()," pos:"+position+" the id:"+id+" selected option:" + mAdapter.getSelectedOption());
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
