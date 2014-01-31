@@ -49,7 +49,7 @@ public class CurrentListAdapter extends ArrayAdapter<String> {
                 AppModel.getInstance().toggleSelectedForElement((String)checkBox.getText());
             }
         });
-        
+
         return convertView;
     }
 }

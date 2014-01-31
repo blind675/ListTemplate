@@ -3,6 +3,7 @@
     <color name="textGray">#666666</color>
     <color name="extraLightGray">#EEEEEE</color>
     <color name="aqua">#66CCCC</color>
+    <color name="grayBlue">#BBCDE3</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

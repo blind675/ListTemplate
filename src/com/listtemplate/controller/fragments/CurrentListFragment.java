@@ -31,11 +31,6 @@ public class CurrentListFragment extends Fragment {
         // Change the list name
         listName.setText(AppModel.getInstance().getNameOfTheCurrentList());
 
-        // Get the list description TextView
-        TextView listDescription = (TextView) currentListView.findViewById(R.id.listDescription);
-        // Change the list description
-        listDescription.setText(AppModel.getInstance().getDescriptionOfTheCurrentList());
-
         // Get the list background photo view
         ImageView listBackgroundPic = (ImageView) currentListView.findViewById(R.id.listBackgroundPic);
         // Set the background picture
