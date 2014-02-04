@@ -1,7 +1,6 @@
 package com.listtemplate.model;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
 import com.listtemplate.model.data.type.TemplateRecord;
 import com.listtemplate.model.database.DBController;
@@ -347,5 +346,32 @@ public class AppModel {
     public void removeElementFromTheCurrentList(String elementName){
         // remove an element from the last list from mOpenLists
         mOpenLists.get(mIndexOfTheCurrentlyOpenedList).removeElement(elementName);
+    }
+
+    /**
+     * Runs trough all the lists in mOpenLists and checks for the name Untitled. If found check for Untitled 1, 2...
+     * If not found return Untitled, Untitled 1 ,2 .....
+     * @return The corresponding valid list name.
+     */
+    public String generateListName() {
+        int numberOfListsNamedUntitled = 0;
+        String returnedName = "Untitled";
+
+        while(true){
+            // create the name with which to compare
+            if(numberOfListsNamedUntitled != 0) {
+                returnedName = "Untitled "+ numberOfListsNamedUntitled;
+            }
+
+            for (CurrentlyUsedList list:mOpenLists){
+                if(list.getName().equals(returnedName)){
+                    numberOfListsNamedUntitled++;
+                    break;
+                }
+            }
+            // TODO: make a test for this
+            return returnedName;
+        }
+
     }
 }

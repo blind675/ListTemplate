@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/exampleStartedOn"
-                android:id="@+id/dateView"
+                android:id="@+id/startedOnDateView"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_marginLeft="10dp"
@@ -46,7 +46,7 @@
                 android:paddingRight="-5dp"
                 android:text="@string/useButton"
                 android:textSize="20sp"
-                android:id="@+id/useButton"
+                android:id="@+id/useListButton"
                 android:layout_alignParentRight="true"/>
 
         </RelativeLayout>
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/listView"
             android:layout_below="@+id/topPart"
-            android:layout_above="@+id/editText"
+            android:layout_above="@+id/addElement"
             android:layout_margin="5dp"
             android:layout_marginTop="10dp"
             android:background="@color/grayBlueDark"/>
@@ -64,7 +64,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/addElement"
         android:layout_alignParentBottom="true"
         android:inputType="text"
         android:textColor="@color/black"
