@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.MenuAdapter;
+import com.listtemplate.controller.fragments.CurrentListFragment;
 import com.listtemplate.controller.fragments.HomeFragment;
 import com.listtemplate.model.AppModel;
 

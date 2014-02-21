@@ -25,6 +25,8 @@
     <string name="add_element">Add element</string>
     <string name="create_list_icon">create list icon</string>
     <string name="create_from_template_icon">create list from template</string>
+    <string name="item_deleted">Item deleted</string>
+    <string name="tap_to_undo">Tap to undo</string>
 
     <!-- general -->
     <string name="thumbnail_photo">Thumbnail Photo</string>

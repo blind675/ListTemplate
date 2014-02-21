@@ -72,7 +72,8 @@ public class HomeFragment extends Fragment{
                 // user clicked on the create part of the list
                 if(mAdapter.getSelectedOption() == 1){
                     // clicked on the create simple list part
-                    // TODO: implement fragment
+                    fragment = new CreateListFragment();
+                    // TODO: find a way to let the menu know things have changed
 
                 } else if( mAdapter.getSelectedOption() == 2){
                     // clicked on the create from template part

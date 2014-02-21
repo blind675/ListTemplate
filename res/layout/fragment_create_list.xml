@@ -14,15 +14,16 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/untitled"
                 android:id="@+id/listTitle"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="7dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:cursorVisible="true"
+                android:imeOptions="actionDone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -30,10 +31,9 @@
                 android:text="@string/exampleStartedOn"
                 android:id="@+id/startedOnDateView"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/listTitle"
-                android:layout_centerHorizontal="true"
+                android:layout_toLeftOf="@+id/useListButton"
                 android:layout_centerVertical="true"/>
 
             <Button
@@ -69,6 +69,8 @@
         android:inputType="text"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:hint="@string/add_element"/>
+        android:hint="@string/add_element"
+        android:cursorVisible="true"
+        android:imeOptions="actionDone"/>
 
 </RelativeLayout>

@@ -30,7 +30,9 @@ public class CurrentListAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
-        convertView = mInflater.inflate(R.layout.row_home_list, parent, false);
+        if(convertView == null){
+            convertView = mInflater.inflate(R.layout.row_home_list, parent, false);
+        }
 
         // Get the name of the element
         String elementName = AppModel.getInstance().getElementOfTheCurrentList(position);
@@ -51,5 +53,11 @@ public class CurrentListAdapter extends ArrayAdapter<String> {
         });
 
         return convertView;
+    }
+
+    // Need to overwrite this because i don't send any array so he doesn't actually know the list size
+    @Override
+    public int getCount() {
+        return AppModel.getInstance().getNumberOfElementsOfTheCurrentList();
     }
 }

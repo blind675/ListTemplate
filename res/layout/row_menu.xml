@@ -19,7 +19,7 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:layout_width="150dp"
+        android:layout_width="195dp"
         android:layout_height="45dp">
         <TextView
             android:id="@+id/menuTitle"
@@ -31,7 +31,7 @@
             android:paddingRight="5dp"
             android:textColor="#000000"
             android:minHeight="14dp"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/menuDescription"
             android:layout_width="fill_parent"
