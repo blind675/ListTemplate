@@ -10,7 +10,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.haarman.listviewanimations.itemmanipulation.SwipeDismissAdapter;
-import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.CreateListAdapter;
 import com.listtemplate.model.AppModel;
@@ -18,7 +17,6 @@ import com.listtemplate.model.AppModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +31,7 @@ public class CreateListFragment extends Fragment {
     private static EditText mAddElementView;
     private static Button mUseListButton;
     private ArrayAdapter<String> mAdapter;
-    private ContextualUndoAdapter mContextualUndoAdapter;
+    private SwipeDismissAdapter mSwipeAdapter;
     /**
      * Called when the fragment is first created.
      */
@@ -51,21 +49,20 @@ public class CreateListFragment extends Fragment {
         mAdapter = new CreateListAdapter(getActivity().getApplicationContext(),mElementsList);
         // Use the swipe to delete with undo from Niek Haarman ( http://nhaarman.github.io/ListViewAnimations/ )
         // Wrap my adapter in his
-        mContextualUndoAdapter = new ContextualUndoAdapter(mAdapter, R.layout.row_create_list_undo, R.id.undo_row_undobutton);
-        // don't know what exactly this does, they made me write it :)
-        mContextualUndoAdapter.setAbsListView(mListView);
-        // Set a list adapter
-        mListView.setAdapter(mContextualUndoAdapter);
-        // set a callback
-        mContextualUndoAdapter.setDeleteItemCallback(new ContextualUndoAdapter.DeleteItemCallback() {
+
+        mSwipeAdapter = new SwipeDismissAdapter(mAdapter, new OnDismissCallback() {
             @Override
-            public void deleteItem(int position) {
-                mElementsList.remove(position);
-                mAdapter.notifyDataSetChanged();
+            public void onDismiss(AbsListView absListView, int[] reverseSortedPositions) {
+
+                for (int position : reverseSortedPositions) {
+                    mElementsList.remove(position);
+                    mAdapter.notifyDataSetChanged();
+                }
+
             }
         });
-        // TODO : this is not working right. Fix https://github.com/nhaarman/ListViewAnimations/wiki/Swipe-To-Dismiss
-
+        mSwipeAdapter.setAbsListView(mListView);
+        mListView.setAdapter(mSwipeAdapter);
 
         // Get the useList button
         mUseListButton = (Button) theCreateListView.findViewById(R.id.useListButton);
@@ -117,7 +114,7 @@ public class CreateListFragment extends Fragment {
             mElementsList.add(mAddElementView.getText().toString());
 
             // refresh the list
-            mContextualUndoAdapter.notifyDataSetChanged();
+            mSwipeAdapter.notifyDataSetChanged();
 
             // clear the field
             mAddElementView.getText().clear();

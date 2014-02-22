@@ -2,6 +2,7 @@
 <resources>
     <color name="textGray">#666666</color>
     <color name="extraLightGray">#EEEEEE</color>
+    <color name="lightGray">#CCCCCC</color>
     <color name="aqua">#66CCCC</color>
     <color name="grayBlue">#BBCDE3</color>
     <color name="grayBlueDark">#A9B9D9</color>
