@@ -22,6 +22,7 @@ public class ListController {
     private static final String[] mAllColumns = {
             SQLDatabaseConnector.LISTS_COLUMN_NAME,
             SQLDatabaseConnector.LISTS_COLUMN_DESCRIPTION,
+            SQLDatabaseConnector.LISTS_COLUMN_CREATION_DATE,
             SQLDatabaseConnector.LISTS_COLUMN_ELEMENTS,
             SQLDatabaseConnector.LISTS_COLUMN_SELECTED,
             SQLDatabaseConnector.LISTS_COLUMN_PICTURE,
@@ -58,20 +59,21 @@ public class ListController {
 
             while (!cursor.isAfterLast()) {
 
-                //TODO: fix
-                Date creationDate = null;
                 // get the name of the list
                 String name = cursor.getString(0);
                 // get the description of the list
                 String description = cursor.getString(1);
+                // get the creation date
+                Date creationDate = new Date();
+                creationDate.setTime(cursor.getLong(2));
                 // get the element string
-                String elements = cursor.getString(2);
+                String elements = cursor.getString(3);
                 // get the selected string
-                String selected = cursor.getString(3);
+                String selected = cursor.getString(4);
                 // get the picture of the list
-                byte[] picture = cursor.getBlob(4);
+                byte[] picture = cursor.getBlob(5);
                 // get the thumbnail of the list
-                byte[] thumbnail = cursor.getBlob(5);
+                byte[] thumbnail = cursor.getBlob(6);
 
                 CurrentlyUsedList listRecord = new CurrentlyUsedList(name,description,creationDate,picture,thumbnail);
 
@@ -118,6 +120,8 @@ public class ListController {
         ContentValues values = new ContentValues();
         values.put(SQLDatabaseConnector.LISTS_COLUMN_NAME,listToWrite.getName());
         values.put(SQLDatabaseConnector.LISTS_COLUMN_DESCRIPTION,listToWrite.getDescription());
+
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_CREATION_DATE,listToWrite.getCreationDate().getTime());
 
         values.put(SQLDatabaseConnector.LISTS_COLUMN_ELEMENTS,listToWrite.getElementsString());
         values.put(SQLDatabaseConnector.LISTS_COLUMN_SELECTED,listToWrite.getSelectedString());

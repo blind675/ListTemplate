@@ -16,6 +16,7 @@ public class SQLDatabaseConnector extends SQLiteOpenHelper {
     // The fields of the lists table
     public static final String LISTS_COLUMN_NAME = "name";
     public static final String LISTS_COLUMN_DESCRIPTION = "description";
+    public static final String LISTS_COLUMN_CREATION_DATE = "creationDate";
     public static final String LISTS_COLUMN_ELEMENTS = "elements";
     public static final String LISTS_COLUMN_SELECTED = "selected";
     public static final String LISTS_COLUMN_PICTURE = "picture";
@@ -27,7 +28,8 @@ public class SQLDatabaseConnector extends SQLiteOpenHelper {
     private static final String LISTS_DATABASE_CREATE = "create table "
             + TABLE_LISTS + "(" +
             LISTS_COLUMN_NAME + " varchar(20) primary key not null , " +
-            LISTS_COLUMN_DESCRIPTION + " varchar(200) ,"+
+            LISTS_COLUMN_DESCRIPTION + " varchar(200) ," +
+            LISTS_COLUMN_CREATION_DATE + " bigint ," +
             LISTS_COLUMN_ELEMENTS + " varchar(2500) ," +
             LISTS_COLUMN_SELECTED + " varchar(500),"+
             LISTS_COLUMN_PICTURE + "  blob, " +

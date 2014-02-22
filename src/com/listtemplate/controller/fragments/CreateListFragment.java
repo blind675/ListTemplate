@@ -134,7 +134,7 @@ public class CreateListFragment extends Fragment {
         String title = null;
 
         // get either the text or the hint as a title for the list
-        if(mTitleView.getText() != null){
+        if(mTitleView.getText() == null){
             if(mTitleView.getHint() != null){
                 title = mTitleView.getHint().toString();
             }
@@ -142,15 +142,20 @@ public class CreateListFragment extends Fragment {
             title = mTitleView.getText().toString();
         }
 
+        // create te list in the model
         AppModel.getInstance().createList(title,null,Calendar.getInstance().getTime(),null);
 
+        // add the elements
         for (String element: mElementsList) {
             AppModel.getInstance().addElementToTheCurrentList(element);
         }
 
+        // save the list to db
+        AppModel.getInstance().saveList(getActivity().getApplicationContext());
+
         Log.i("TemplateList-Info"," Exit the use the current list method");
 
-        // TODO: change fragments, save list to db and update the menu :)
+        // TODO: change fragments and update the menu :)
         AppModel model = AppModel.getInstance();
     }
 }
