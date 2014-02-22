@@ -2,6 +2,8 @@ package com.listtemplate.model.data.type;
 
 import android.test.AndroidTestCase;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Catalin Bora
@@ -13,7 +15,7 @@ public class CurrentlyUsedListTest extends AndroidTestCase {
     public void testCurrentlyUsedList(){
 
         //create a new empty list
-        CurrentlyUsedList list = new CurrentlyUsedList("Test List","This is a test list.",null,null);
+        CurrentlyUsedList list = new CurrentlyUsedList("Test List","This is a test list.", new Date(),null,null);
 
         //test if list created successfully
         assertEquals("Name of list is wrong.","Test List", list.getName());

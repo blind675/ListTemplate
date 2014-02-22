@@ -1,5 +1,6 @@
 package com.listtemplate.model.data.type;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -9,16 +10,18 @@ import java.util.LinkedHashMap;
 public class CurrentlyUsedList {
     private final String mName;
     private final String mDescription;
+    private final Date mCreationDate;
     // really bad .. use 2 lists
     private final LinkedHashMap<String,Boolean> mElements = new LinkedHashMap<String, Boolean>();
     private final byte[] mBackground;
     private final byte[] mThumbnail;
 
-    public CurrentlyUsedList(String name, String description,byte[] background, byte[] thumbnail){
+    public CurrentlyUsedList(String name, String description, Date creationDate, byte[] background, byte[] thumbnail){
         mName = name;
         mDescription = description;
         mBackground = background;
         mThumbnail = thumbnail;
+        mCreationDate = creationDate;
     }
 
     /**
@@ -51,6 +54,14 @@ public class CurrentlyUsedList {
      */
     public String getDescription(){
         return mDescription;
+    }
+
+    /**
+     * Get the creation date of the list
+     * @return creation date of the list
+     */
+    public Date getCreationDate() {
+        return mCreationDate;
     }
 
     public byte[] getBackground(){

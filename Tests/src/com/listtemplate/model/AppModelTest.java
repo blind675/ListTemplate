@@ -3,6 +3,8 @@ package com.listtemplate.model;
 import android.test.AndroidTestCase;
 import com.listtemplate.model.data.type.TemplateRecord;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Catalin BORA
@@ -24,7 +26,7 @@ public class AppModelTest extends AndroidTestCase {
 
     public void testCreateSimpleList(){
         // create a list with name,description
-        AppModel.getInstance().createList("Test List","This is a test list.",null);
+        AppModel.getInstance().createList("Test List","This is a test list.", new Date(),null);
         // see it's empty
         assertEquals("List name is wrong","Test List",AppModel.getInstance().getNameOfTheCurrentList());
         assertEquals("List name is wrong","This is a test list.",AppModel.getInstance().getDescriptionOfTheCurrentList());
@@ -130,7 +132,7 @@ public class AppModelTest extends AndroidTestCase {
 
     public void testUseList(){
         // create a list with name,description
-        AppModel.getInstance().createList("Test List","This is a test list.",null);
+        AppModel.getInstance().createList("Test List","This is a test list.", new Date(),null);
         // add elements to it
         AppModel.getInstance().addElementToTheCurrentList("Pants");
         AppModel.getInstance().addElementToTheCurrentList("Socks");

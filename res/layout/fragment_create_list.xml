@@ -39,7 +39,7 @@
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:paddingLeft="-5dp"
@@ -47,6 +47,7 @@
                 android:text="@string/useButton"
                 android:textSize="20sp"
                 android:id="@+id/useListButton"
+                android:onClick="useTheList"
                 android:layout_alignParentRight="true"/>
 
         </RelativeLayout>

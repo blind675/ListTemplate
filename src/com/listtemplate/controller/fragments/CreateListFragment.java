@@ -2,6 +2,7 @@ package com.listtemplate.controller.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +27,8 @@ import java.util.List;
 public class CreateListFragment extends Fragment {
 
     private List<String> mElementsList = new ArrayList<String>();
-    private static ListView mListView;
     private static EditText mTitleView;
     private static EditText mAddElementView;
-    private static Button mUseListButton;
     private ArrayAdapter<String> mAdapter;
     private SwipeDismissAdapter mSwipeAdapter;
     /**
@@ -41,9 +40,10 @@ public class CreateListFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View theCreateListView = inflater.inflate(R.layout.fragment_create_list, container, false);
+        assert theCreateListView != null;
 
         // Get ListView object from xml
-        mListView = (ListView) theCreateListView.findViewById(R.id.listView);
+        ListView listView = (ListView) theCreateListView.findViewById(R.id.listView);
 
         // Create a list adapter
         mAdapter = new CreateListAdapter(getActivity().getApplicationContext(),mElementsList);
@@ -61,11 +61,8 @@ public class CreateListFragment extends Fragment {
 
             }
         });
-        mSwipeAdapter.setAbsListView(mListView);
-        mListView.setAdapter(mSwipeAdapter);
-
-        // Get the useList button
-        mUseListButton = (Button) theCreateListView.findViewById(R.id.useListButton);
+        mSwipeAdapter.setAbsListView(listView);
+        listView.setAdapter(mSwipeAdapter);
 
         // Get the list title view
         mTitleView = (EditText) theCreateListView.findViewById(R.id.listTitle);
@@ -97,8 +94,14 @@ public class CreateListFragment extends Fragment {
         });
 
         // Get the use list button
-        mUseListButton = (Button) theCreateListView.findViewById(R.id.useListButton);
-        // TODO: put an event listener here too
+        Button useListButton = (Button) theCreateListView.findViewById(R.id.useListButton);
+        useListButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                // Process the data and use the list
+                useTheList();
+            }
+        });
 
         return theCreateListView;
     }
@@ -109,16 +112,45 @@ public class CreateListFragment extends Fragment {
      */
     private void executeAdd(){
         // don't add empty rows
-        if(!mAddElementView.getText().toString().isEmpty()){
-            // add element
-            mElementsList.add(mAddElementView.getText().toString());
-
-            // refresh the list
-            mSwipeAdapter.notifyDataSetChanged();
-
-            // clear the field
-            mAddElementView.getText().clear();
+        if (mAddElementView.getText()!= null && mAddElementView.getText().toString().isEmpty()) {
+            return;
         }
+        // add element
+        mElementsList.add(mAddElementView.getText().toString());
+
+        // refresh the list
+        mSwipeAdapter.notifyDataSetChanged();
+
+        // clear the field
+        mAddElementView.getText().clear();
     }
 
+    /**
+     * Save and open the current list
+     */
+    private void useTheList(){
+        Log.i("TemplateList-Info"," Trying to use the currently created list.");
+
+        String title = null;
+
+        // get either the text or the hint as a title for the list
+        if(mTitleView.getText() != null){
+            if(mTitleView.getHint() != null){
+                title = mTitleView.getHint().toString();
+            }
+        } else {
+            title = mTitleView.getText().toString();
+        }
+
+        AppModel.getInstance().createList(title,null,Calendar.getInstance().getTime(),null);
+
+        for (String element: mElementsList) {
+            AppModel.getInstance().addElementToTheCurrentList(element);
+        }
+
+        Log.i("TemplateList-Info"," Exit the use the current list method");
+
+        // TODO: change fragments, save list to db and update the menu :)
+        AppModel model = AppModel.getInstance();
+    }
 }

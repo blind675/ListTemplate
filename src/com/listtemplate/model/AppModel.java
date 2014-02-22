@@ -7,6 +7,7 @@ import com.listtemplate.model.database.DBController;
 import com.listtemplate.model.server.WSController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -200,7 +201,18 @@ public class AppModel {
             return null;
         }
     }
-
+    /**
+     * Get the creation date of the list referenced by mIndexOfTheCurrentlyOpenedList
+     * If no list is opened return null
+     * @return creation date of the list
+     */
+    public Date getCreationDate(){
+        if(mIndexOfTheCurrentlyOpenedList != -1){
+            return mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getCreationDate();
+        } else {
+            return null;
+        }
+    }
     /**
      * Get the background image for the list referenced by mIndexOfTheCurrentlyOpenedList
      * If no list is opened return null
@@ -281,6 +293,7 @@ public class AppModel {
         createList(
             mTemplates.get(index).getName(),
             mTemplates.get(index).getDescription(),
+            new Date(),
             mTemplates.get(index).getBackground());
         // add the elements from the templates
         for (int i=0;i < mTemplates.get(index).getNumberOfElements();i++){
@@ -294,12 +307,12 @@ public class AppModel {
      * @param name name of the list
      * @param background background of the list
      */
-    public void createList(String name, String description, byte[] background) {
+    public void createList(String name, String description, Date creationDate, byte[] background) {
         // create thumbnail from background
         //TODO: utilities method that generates a thumbnail
         byte[] thumbnail = null;
-        // create a list with name,description,background + thumbnail
-        CurrentlyUsedList newList = new CurrentlyUsedList(name,description,background,thumbnail);
+        // create a list with name,description,date,background + thumbnail
+        CurrentlyUsedList newList = new CurrentlyUsedList(name,description,creationDate,background,thumbnail);
         // add it to the back of the mOpenLists
         mOpenLists.add(newList);
         // set mIndexOfTheCurrentlyOpenedList to last position (use openList())

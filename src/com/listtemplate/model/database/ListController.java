@@ -8,6 +8,7 @@ import com.listtemplate.model.data.type.CurrentlyUsedList;
 import com.listtemplate.model.database.SQLconnector.SQLDatabaseConnector;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,6 +58,8 @@ public class ListController {
 
             while (!cursor.isAfterLast()) {
 
+                //TODO: fix
+                Date creationDate = null;
                 // get the name of the list
                 String name = cursor.getString(0);
                 // get the description of the list
@@ -70,7 +73,7 @@ public class ListController {
                 // get the thumbnail of the list
                 byte[] thumbnail = cursor.getBlob(5);
 
-                CurrentlyUsedList listRecord = new CurrentlyUsedList(name,description,picture,thumbnail);
+                CurrentlyUsedList listRecord = new CurrentlyUsedList(name,description,creationDate,picture,thumbnail);
 
                 String[] elementsList = elements.split(",");
                 String[] selectedList = selected.split(",");
