@@ -382,7 +382,7 @@ public class AppModel {
                     break;
                 }
             }
-            // TODO: make a test for this
+            // TODO: Not working.. i think 
             return returnedName;
         }
 

@@ -16,8 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.MenuAdapter;
-import com.listtemplate.controller.fragments.CurrentListFragment;
 import com.listtemplate.controller.fragments.HomeFragment;
+import com.listtemplate.controller.utils.MenuTracker;
 import com.listtemplate.model.AppModel;
 
 /**
@@ -42,7 +42,7 @@ public class MyActivity extends FragmentActivity {
 
         // load the data of the DB in the AppModel first
         // the AppModel works like a cache (I overcomplicated a little)
-        // TODO: think of having a lading screen
+        // TODO: think of having a loading screen
 
         // load the templates
         AppModel.getInstance().loadTemplates(this);
@@ -86,6 +86,9 @@ public class MyActivity extends FragmentActivity {
             }
 
             public void onDrawerOpened(View drawerView) {
+                // set the selected fragment before opening the menu drawer
+                mDrawerList.setItemChecked(MenuTracker.getInstance().getOpenedFragment(), true);
+
                 getActionBar().setTitle(mDrawerTitle);
                 //mAdapter.notifyDataSetChanged(); // forced refresh
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -130,28 +133,37 @@ public class MyActivity extends FragmentActivity {
                 setTitle(R.string.current_list);
                 // get the fragment for current list
                 // fragment = new CurrentListFragment();
+                // set the menu tracker to current list
+                MenuTracker.getInstance().setOpenedFragment(MenuTracker.CURRENT_LIST);
                 break;
             case 3: /** Called when the user clicks the Browse Templates tab */
                 setTitle(R.string.browse_templates);
                 // get the fragment for spending
                 // fragment = new BrowseTemplatesFragment();
+                // set the menu tracker to browse templates
+                MenuTracker.getInstance().setOpenedFragment(MenuTracker.BROWSE_TEMPLATES);
                 break;
             case 4: /** Called when the user clicks the Create Template tab */
                 setTitle(R.string.create_template);
                 // get the fragment for spending
                 // fragment = new CreateTemplateFragment();
+                // set the menu tracker to create template
+                MenuTracker.getInstance().setOpenedFragment(MenuTracker.CREATE_TEMPLATE);
                 break;
             case 5: /** Called when the user clicks the Settings tab */
                 setTitle(R.string.settings);
                 // get the fragment for spending
                 // fragment = new SettingsTemplate();
+                // set the menu tracker to settings
+                MenuTracker.getInstance().setOpenedFragment(MenuTracker.SETTINGS);
                 break;
-
             default:/* Called when the user clicks the Home tab
                        the default is home fragment also the same as case 2 */
                 setTitle(R.string.home);
                 // get the fragment for home
                 fragment = new HomeFragment();
+                // set the menu tracker to home
+                MenuTracker.getInstance().setOpenedFragment(MenuTracker.HOME);
                 break;
         }
 

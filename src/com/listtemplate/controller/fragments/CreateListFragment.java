@@ -1,6 +1,8 @@
 package com.listtemplate.controller.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,6 +15,7 @@ import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.haarman.listviewanimations.itemmanipulation.SwipeDismissAdapter;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.CreateListAdapter;
+import com.listtemplate.controller.utils.MenuTracker;
 import com.listtemplate.model.AppModel;
 
 import java.text.SimpleDateFormat;
@@ -152,6 +155,22 @@ public class CreateListFragment extends Fragment {
 
         // save the list to db
         AppModel.getInstance().saveList(getActivity().getApplicationContext());
+
+        // change the fragment to the current list
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = new CurrentListFragment();
+
+        if(fragmentManager != null){
+
+            // update the main content by replacing fragments
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.content_frame, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
+        // set the menu tracker to current list
+        MenuTracker.getInstance().setOpenedFragment(MenuTracker.CURRENT_LIST);
 
         Log.i("TemplateList-Info"," Exit the use the current list method");
 

@@ -27,6 +27,7 @@ public class CurrentListFragment extends Fragment {
         View currentListView = inflater.inflate(R.layout.fragment_current_list, container, false);
 
         // Get the list name TextView
+        assert currentListView != null;
         TextView listName = (TextView) currentListView.findViewById(R.id.listTitle);
         // Change the list name
         listName.setText(AppModel.getInstance().getNameOfTheCurrentList());
@@ -35,7 +36,9 @@ public class CurrentListFragment extends Fragment {
         ImageView listBackgroundPic = (ImageView) currentListView.findViewById(R.id.listBackgroundPic);
         // Set the background picture
         byte[] backgroundImage = AppModel.getInstance().getBackgroundImageOfTheCurrentList();
-        listBackgroundPic.setImageBitmap(BitmapFactory.decodeByteArray(backgroundImage, 0, backgroundImage.length));
+        if(backgroundImage != null){
+            listBackgroundPic.setImageBitmap(BitmapFactory.decodeByteArray(backgroundImage, 0, backgroundImage.length));
+        }
 
         // Get ListView object from xml
         ListView listView = (ListView) currentListView.findViewById(R.id.listView);
