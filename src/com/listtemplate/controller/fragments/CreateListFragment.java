@@ -137,8 +137,8 @@ public class CreateListFragment extends Fragment {
         String title = null;
 
         // get either the text or the hint as a title for the list
-        if(mTitleView.getText() == null){
-            if(mTitleView.getHint() != null){
+        if(mTitleView.getText() != null && mTitleView.getText().toString().isEmpty()){
+            if(mTitleView.getHint() != null && !mTitleView.getHint().toString().isEmpty()){
                 title = mTitleView.getHint().toString();
             }
         } else {

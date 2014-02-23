@@ -41,11 +41,6 @@ public class CreateListAdapter extends ArrayAdapter<String> {
         // Set the label
         elementLabel.setText(mElementsList.get(position));
 
-        // Get the imageView
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
-
-        //TODO: remove element
-
         return convertView;
     }
 

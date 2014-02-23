@@ -370,21 +370,20 @@ public class AppModel {
         int numberOfListsNamedUntitled = 0;
         String returnedName = "Untitled";
 
-        while(true){
-            // create the name with which to compare
-            if(numberOfListsNamedUntitled != 0) {
+        // go trough the elements
+        for (int i=0; i<mOpenLists.size(); i++){
+            // if found a matching name
+            if(mOpenLists.get(i).getName().equals(returnedName)){
+                // increment number
+                numberOfListsNamedUntitled++;
+                // recreate name
                 returnedName = "Untitled "+ numberOfListsNamedUntitled;
+                // restart from beginning
+                i=0;
             }
-
-            for (CurrentlyUsedList list:mOpenLists){
-                if(list.getName().equals(returnedName)){
-                    numberOfListsNamedUntitled++;
-                    break;
-                }
-            }
-            // TODO: Not working.. i think 
-            return returnedName;
         }
+
+        return returnedName;
 
     }
 }

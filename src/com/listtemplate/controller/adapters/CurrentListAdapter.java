@@ -31,7 +31,7 @@ public class CurrentListAdapter extends ArrayAdapter<String> {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.row_home_list, parent, false);
+            convertView = mInflater.inflate(R.layout.row_current_list, parent, false);
         }
 
         // Get the name of the element

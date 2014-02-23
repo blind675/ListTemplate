@@ -51,7 +51,7 @@ public class HomeListAdapter extends ArrayAdapter<CurrentlyUsedList>{
                 imageView.setImageBitmap(BitmapFactory.decodeByteArray(thumbnail, 0, thumbnail.length));
             }
             titleView.setText(mOpenLists.get(position).getName());
-            startedView.setText(R.string.started_on + "------");
+            startedView.setText(mContext.getString(R.string.started_on) + " ------");
             descriptionView.setText(mOpenLists.get(position).getDescription());
 
         } else {
