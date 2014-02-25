@@ -62,8 +62,8 @@ public class CurrentListFragment extends Fragment {
         super.onPause();
 
         // Save the state of the currently opened list in the database
-        AppModel.getInstance().saveList(getActivity().getApplicationContext());
+        // AppModel.getInstance().saveList(getActivity().getApplicationContext());
         // Set the currently opened list to none
-        AppModel.getInstance().closeCurrentlyOpenList();
+        // AppModel.getInstance().closeCurrentlyOpenList();
     }
 }

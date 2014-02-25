@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
-import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
-import com.haarman.listviewanimations.itemmanipulation.SwipeDismissAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.CreateListAdapter;
 import com.listtemplate.controller.utils.MenuTracker;
@@ -174,7 +174,5 @@ public class CreateListFragment extends Fragment {
 
         Log.i("TemplateList-Info"," Exit the use the current list method");
 
-        // TODO: change fragments and update the menu :)
-        AppModel model = AppModel.getInstance();
     }
 }

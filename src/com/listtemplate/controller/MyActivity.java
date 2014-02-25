@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.MenuAdapter;
+import com.listtemplate.controller.fragments.CurrentListFragment;
 import com.listtemplate.controller.fragments.HomeFragment;
 import com.listtemplate.controller.utils.MenuTracker;
 import com.listtemplate.model.AppModel;
@@ -87,7 +88,7 @@ public class MyActivity extends FragmentActivity {
 
             public void onDrawerOpened(View drawerView) {
                 // set the selected fragment before opening the menu drawer
-                mDrawerList.setItemChecked(MenuTracker.getInstance().getOpenedFragment(), true);
+                mDrawerList.setItemChecked(MenuTracker.getInstance().getOpenedFragment()-1, true);
 
                 getActionBar().setTitle(mDrawerTitle);
                 //mAdapter.notifyDataSetChanged(); // forced refresh
@@ -132,7 +133,7 @@ public class MyActivity extends FragmentActivity {
             case 1: /** Called when the user clicks the Current List tab */
                 setTitle(R.string.current_list);
                 // get the fragment for current list
-                // fragment = new CurrentListFragment();
+                fragment = new CurrentListFragment();
                 // set the menu tracker to current list
                 MenuTracker.getInstance().setOpenedFragment(MenuTracker.CURRENT_LIST);
                 break;
@@ -177,7 +178,7 @@ public class MyActivity extends FragmentActivity {
         }
 
         // update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
+        mDrawerList.setItemChecked(position-1, true);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
@@ -224,7 +225,7 @@ public class MyActivity extends FragmentActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            selectItem(position+1);
         }
     }
 
