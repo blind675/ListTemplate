@@ -24,6 +24,9 @@ public class MenuTracker {
         currentFragment = HOME;
     }
 
+
+    // TODO: actualy save the list adapter gere
+    // major hack or not :D
     /**
      * Set the opened fragment.
      * @param tab the fragment number

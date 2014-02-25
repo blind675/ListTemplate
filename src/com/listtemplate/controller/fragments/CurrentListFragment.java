@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.CurrentListAdapter;
+import com.listtemplate.controller.utils.MenuTracker;
 import com.listtemplate.model.AppModel;
 
 /**
@@ -47,6 +48,12 @@ public class CurrentListFragment extends Fragment {
         CurrentListAdapter adapter = new CurrentListAdapter(getActivity().getApplicationContext(),R.id.checkBox);
         // Set the custom adapter
         listView.setAdapter(adapter);
+
+        // In case i didn't come from the menu
+        // set the title again :)
+        getActivity().getActionBar().setTitle(R.string.current_list);
+        // and set the menu tracker to current list
+        MenuTracker.getInstance().setOpenedFragment(MenuTracker.CURRENT_LIST);
 
         // return the fragment
         return currentListView;
