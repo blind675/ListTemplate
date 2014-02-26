@@ -1,5 +1,7 @@
 package com.listtemplate.controller.utils;
 
+import android.widget.ListView;
+
 /**
  * Created by Catalin BORA on 2/22/14.
  *
@@ -9,6 +11,7 @@ public class MenuTracker {
 
     private static final MenuTracker INSTANCE = new MenuTracker();
     private int currentFragment;
+    private ListView mDrawerList;
 
     public static final int CURRENT_LIST = 1;
     public static final int HOME = 2;
@@ -22,17 +25,29 @@ public class MenuTracker {
 
     private MenuTracker() {
         currentFragment = HOME;
+        mDrawerList = null;
     }
 
-
-    // TODO: actualy save the list adapter gere
     // major hack or not :D
+    /**
+     * Set the listView of the menu so it's visible from anywhere
+     * @param menuList the list view of the menu
+     */
+    public void setMenuList(ListView menuList){
+        mDrawerList = menuList;
+    }
+
     /**
      * Set the opened fragment.
      * @param tab the fragment number
      */
     public void setOpenedFragment(int tab){
         currentFragment = tab;
+
+        // set selected if the list vew is set
+        if(mDrawerList != null){
+            mDrawerList.setItemChecked(tab-1,true);
+        }
     }
 
     /**

@@ -10,6 +10,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,7 +49,6 @@ public class MyActivity extends FragmentActivity {
         // load the templates
         AppModel.getInstance().loadTemplates(this);
 
-
         // load the current lists
         AppModel.getInstance().loadLists(this);
 
@@ -60,6 +60,9 @@ public class MyActivity extends FragmentActivity {
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // set the menu list view in the menu tracker
+        MenuTracker.getInstance().setMenuList(mDrawerList);
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -87,9 +90,6 @@ public class MyActivity extends FragmentActivity {
             }
 
             public void onDrawerOpened(View drawerView) {
-                // set the selected fragment before opening the menu drawer
-                mDrawerList.setItemChecked(MenuTracker.getInstance().getOpenedFragment()-1, true);
-
                 getActionBar().setTitle(mDrawerTitle);
                 //mAdapter.notifyDataSetChanged(); // forced refresh
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
