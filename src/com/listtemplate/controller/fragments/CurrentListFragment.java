@@ -3,6 +3,7 @@ package com.listtemplate.controller.fragments;
 import android.app.Fragment;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,15 @@ public class CurrentListFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+
+        Log.i("TemplateList-Info", " Called onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        Log.i("TemplateList-Info", " Called onStop");
 
         // Save the state of the currently opened list in the database
         // AppModel.getInstance().saveList(getActivity().getApplicationContext());
