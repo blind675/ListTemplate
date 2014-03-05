@@ -42,13 +42,11 @@ public class CurrentListAdapter extends ArrayAdapter<String> {
         checkBox.setText(elementName);
         checkBox.setChecked(AppModel.getInstance().isElementSelected(elementName));
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                // Found trick on the net.
-                // TODO: check if it works :)
-                CheckBox checkBox = (CheckBox) compoundButton;
-                AppModel.getInstance().toggleSelectedForElement((String)checkBox.getText());
+            public void onClick(View view) {
+                CheckBox checkBox = (CheckBox) view;
+                AppModel.getInstance().toggleSelectedForElement((String) checkBox.getText());
             }
         });
 

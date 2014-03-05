@@ -37,6 +37,17 @@ public class DBController {
     }
 
     /**
+     * Update the record in the database
+     * If not present do nothing
+     * @param listToWrite the list to update
+     * @param context the context
+     */
+    public static void updateList(CurrentlyUsedList listToWrite, Context context){
+        // delegate
+        ListController.updateList(listToWrite,context);
+    }
+
+    /**
      * Write the template to the database.
      * If present do nothing.
      * @param templateToWrite the template to be written

@@ -87,6 +87,7 @@ public class ListController {
                 int i=0;
                 for(String select: selectedList ){
                     listRecord.setElementSelected(listRecord.getElement(i), select.equals("1"));
+                    i++;
                 }
 
                 returnList.add(listRecord);
@@ -129,6 +130,22 @@ public class ListController {
         values.put(SQLDatabaseConnector.LISTS_COLUMN_PICTURE,listToWrite.getBackground());
         values.put(SQLDatabaseConnector.LISTS_COLUMN_THUMB,listToWrite.getThumbnail());
         mDatabase.insert(SQLDatabaseConnector.TABLE_LISTS, null, values);
+
+    }
+
+    /**
+     * Update the record in the database
+     * If not present do nothing
+     * @param listToWrite the list to update
+     * @param context the context
+     */
+    public static void updateList(CurrentlyUsedList listToWrite, Context context){
+
+        ContentValues values = new ContentValues();
+        values.put(SQLDatabaseConnector.LISTS_COLUMN_SELECTED,listToWrite.getSelectedString());
+
+        // the name column is a unique key
+        mDatabase.update(SQLDatabaseConnector.TABLE_LISTS,values,SQLDatabaseConnector.LISTS_COLUMN_NAME+"=\'"+listToWrite.getName()+"\'",null);
 
     }
 

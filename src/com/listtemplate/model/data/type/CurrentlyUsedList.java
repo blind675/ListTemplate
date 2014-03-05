@@ -148,7 +148,7 @@ public class CurrentlyUsedList {
     public String getSelectedString(){
         String returnString = "";
         for (String element : mElements.keySet()) {
-            returnString += (isItemSelected(element))?"1":"0" + ",";
+            returnString += (isItemSelected(element))?"1,":"0,";
         }
         return returnString;
     }

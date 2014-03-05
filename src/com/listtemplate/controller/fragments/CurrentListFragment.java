@@ -79,8 +79,8 @@ public class CurrentListFragment extends Fragment {
         Log.i("TemplateList-Info", " Called onStop");
 
         // Save the state of the currently opened list in the database
-        // AppModel.getInstance().saveList(getActivity().getApplicationContext());
+        AppModel.getInstance().updateList(getActivity().getApplicationContext());
         // Set the currently opened list to none
-        // AppModel.getInstance().closeCurrentlyOpenList();
+        AppModel.getInstance().closeCurrentlyOpenList();
     }
 }

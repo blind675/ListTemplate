@@ -329,6 +329,15 @@ public class AppModel {
     }
 
     /**
+     * Update the list referenced by mIndexOfTheCurrentlyOpenedList to the database.
+     * If object not already in database do nothing
+     * @param context the context
+     */
+    public void updateList(Context context) {
+        DBController.updateList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList),context);
+    }
+
+    /**
      * Remove list referenced by mIndexOfTheCurrentlyOpenedList
      * Also remove from database if present
      * @param context the context
