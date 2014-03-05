@@ -11,8 +11,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.listtemplate.R;
+import com.listtemplate.model.AppModel;
 import com.listtemplate.model.data.type.CurrentlyUsedList;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,7 +55,13 @@ public class HomeListAdapter extends ArrayAdapter<CurrentlyUsedList>{
                 imageView.setImageBitmap(BitmapFactory.decodeByteArray(thumbnail, 0, thumbnail.length));
             }
             titleView.setText(mOpenLists.get(position).getName());
-            startedView.setText(mContext.getString(R.string.started_on) + " ------");
+
+            // Get a simple date format
+            SimpleDateFormat mDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+            // Get the current date
+            Date startDate = AppModel.getInstance().getCreationDateForList(position);
+            // Set the started date to start date
+            startedView.setText(mContext.getString(R.string.started_on) +" "+mDateFormat.format(startDate));
             descriptionView.setText(mOpenLists.get(position).getDescription());
 
         } else {

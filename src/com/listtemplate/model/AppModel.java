@@ -157,7 +157,6 @@ public class AppModel {
         // return the size of mOpenLists list
         return mOpenLists.size();
     }
-
     /**
      * Opens the list by setting the mIndexOfTheCurrentlyOpenedList
      * @param index the list index in mOpenLists
@@ -166,7 +165,6 @@ public class AppModel {
         // set mIndexOfTheCurrentlyOpenedList
         mIndexOfTheCurrentlyOpenedList = index;
     }
-
     /**
      * Close the list by setting the mIndexOfTheCurrentlyOpenedList to -1. No argument.
      */
@@ -188,7 +186,6 @@ public class AppModel {
             return null;
         }
     }
-
     /**
      * Get the description of the list referenced by mIndexOfTheCurrentlyOpenedList
      * If no list is opened return null
@@ -213,6 +210,20 @@ public class AppModel {
             return null;
         }
     }
+
+    /**
+     * Get the creation date of the list given as parameter
+     * If no list is opened return null
+     * @param listIndex the list to return the date of
+     * @return creation date of the list
+     */
+    public Date getCreationDateForList(int listIndex){
+        if( listIndex >= 0 && listIndex < mOpenLists.size() ){
+            return mOpenLists.get(listIndex).getCreationDate();
+        } else {
+            return null;
+        }
+    }
     /**
      * Get the background image for the list referenced by mIndexOfTheCurrentlyOpenedList
      * If no list is opened return null
@@ -225,7 +236,6 @@ public class AppModel {
             return null;
         }
     }
-
     /**
      * Get the number of elements of the list referenced by mIndexOfTheCurrentlyOpenedList
      * If no list is opened return 0
@@ -238,7 +248,6 @@ public class AppModel {
             return 0;
         }
     }
-
     /**
      * Get the element of the list referenced by mIndexOfTheCurrentlyOpenedList at the position index
      * If no list is opened return null
@@ -253,7 +262,6 @@ public class AppModel {
             return null;
         }
     }
-
     /**
      * Check if the state of the element given by name in the list referenced by mIndexOfTheCurrentlyOpenedList
      * is selected or not
@@ -265,7 +273,6 @@ public class AppModel {
         // get the selected state element of the mIndexOfTheCurrentlyOpenedList list in mOpenedLists
         return mIndexOfTheCurrentlyOpenedList != -1 && mOpenLists.get(mIndexOfTheCurrentlyOpenedList).isItemSelected(elementName);
     }
-
     /**
      * Change the internal state of the element in the list referenced by mIndexOfTheCurrentlyOpenedList(currently opened list)
      * Does not change the database value
