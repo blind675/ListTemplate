@@ -13,5 +13,16 @@
         android:id="@+id/checkBox"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:checked="true"/>
+        android:checked="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textView"
+            android:layout_centerVertical="true" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" android:layout_marginRight="24dp"/>
+
 </RelativeLayout>

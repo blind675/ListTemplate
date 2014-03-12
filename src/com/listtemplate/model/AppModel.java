@@ -22,6 +22,7 @@ public class AppModel {
     private List<CurrentlyUsedList> mOpenLists = new ArrayList<CurrentlyUsedList>();
     private List<TemplateRecord> mTemplates = new ArrayList<TemplateRecord>();
     private int mIndexOfTheCurrentlyOpenedList = -1;
+    private int mNumberOfSelectedItems = 0;
 
     public static AppModel getInstance() {
         return INSTANCE;
@@ -159,11 +160,20 @@ public class AppModel {
     }
     /**
      * Opens the list by setting the mIndexOfTheCurrentlyOpenedList
+     * and calculate the number of selected items
      * @param index the list index in mOpenLists
      */
     public void openList(int index){
         // set mIndexOfTheCurrentlyOpenedList
         mIndexOfTheCurrentlyOpenedList = index;
+        // reset numbers of selected items
+        mNumberOfSelectedItems = 0;
+        // run trough the elements and set the number of the checked ones
+        for(int i=0; i < mOpenLists.get(index).getNumberOfElements(); i++ ) {
+            if(mOpenLists.get(index).isItemSelected(mOpenLists.get(index).getElement(i))){
+                mNumberOfSelectedItems++;
+            }
+        }
     }
     /**
      * Close the list by setting the mIndexOfTheCurrentlyOpenedList to -1. No argument.
@@ -275,16 +285,33 @@ public class AppModel {
     }
     /**
      * Change the internal state of the element in the list referenced by mIndexOfTheCurrentlyOpenedList(currently opened list)
+     * and keep track of the number of selected elements
      * Does not change the database value
      * If no list is opened do nothing
      * @param element the element whose selected state changes
      */
     public void toggleSelectedForElement(String element){
         if(mIndexOfTheCurrentlyOpenedList != -1){
+            if(mOpenLists.get(mIndexOfTheCurrentlyOpenedList).isItemSelected(element)){
+                mNumberOfSelectedItems--;
+            } else {
+                mNumberOfSelectedItems++;
+            }
             mOpenLists.get(mIndexOfTheCurrentlyOpenedList).toggleElementSelected(element);
         }
     }
 
+    /**
+     * Check if all the element of the opened list referenced by mIndexOfTheCurrentlyOpenedList are checked
+     * @return if the list is all checked or ot
+     */
+    public boolean isTheListComplete(){
+        if(mIndexOfTheCurrentlyOpenedList != -1 && mNumberOfSelectedItems == mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getNumberOfElements()){
+            return true;
+        } else {
+            return false;
+        }
+    }
     //*************************************** CREATING LIST PART **************************************************//
 
     /**

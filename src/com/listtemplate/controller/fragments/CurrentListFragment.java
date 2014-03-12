@@ -7,9 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.CurrentListAdapter;
 import com.listtemplate.controller.utils.MenuTracker;
@@ -50,6 +48,15 @@ public class CurrentListFragment extends Fragment {
         // Set the custom adapter
         listView.setAdapter(adapter);
 
+        // Set a click adapter on the list
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("TemplateList-Info", " Clicked on list ");
+
+                Toast.makeText(getActivity().getApplicationContext(),"All good:"+AppModel.getInstance().isTheListComplete(),Toast.LENGTH_SHORT).show();
+            }
+        });
         // In case i didn't come from the menu
         // set the title again :)
         getActivity().getActionBar().setTitle(R.string.current_list);
