@@ -20,6 +20,7 @@
     <string name="started_on">Started on:</string>
 
     <!-- create list part-->
+    <string name="create_list">Create List</string>
     <string name="untitled">Untitled 0</string>
     <string name="useButton"> Use </string>
     <string name="add_element">Add element</string>
@@ -31,6 +32,15 @@
     <!-- use list part -->
     <string name="list_is_complete">The list is completed.</string>
     <string name="remove_list">Do you want to remove the list?</string>
+
+    <!-- create template part -->
+    <string name="save">Save</string>
+    <string name="template_name">Template Name</string>
+    <string name="description_hint">Please add a short description of the template you are trying to create. Don\'t
+        forget to mention the purpose of the template
+    </string>
+    <string name="add_author">Add author name:</string>
+    <string name="receive_mail">Willing to receive thank you e-mails:</string>
 
     <!-- general -->
     <string name="thumbnail_photo">Thumbnail Photo</string>

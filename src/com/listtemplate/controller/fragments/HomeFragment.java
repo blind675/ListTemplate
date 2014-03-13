@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.haarman.listviewanimations.itemmanipulation.SwipeDismissAdapter;
@@ -92,6 +93,13 @@ public class HomeFragment extends Fragment{
 
             // user clicked on an existing list
             if(position < AppModel.getInstance().getNumberOfLists()){
+
+                // change the alpha to mark as selected
+                // get the background picture
+                ImageView imageView = (ImageView) view.findViewById(R.id.thumbnailView);
+                // change the alpha
+                imageView.setAlpha(0.7f);
+
                 // open the list from the - business logic perspective
                 AppModel.getInstance().openList(position);
 
@@ -103,7 +111,6 @@ public class HomeFragment extends Fragment{
                 if(mAdapter.getSelectedOption() == 1){
                     // clicked on the create simple list part
                     fragment = new CreateListFragment();
-                    // TODO: find a way to let the menu know things have changed
 
                 } else if( mAdapter.getSelectedOption() == 2){
                     // clicked on the create from template part

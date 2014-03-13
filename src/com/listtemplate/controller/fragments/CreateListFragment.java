@@ -106,6 +106,9 @@ public class CreateListFragment extends Fragment {
             }
         });
 
+        // Set the title of the window, it's not set in other ways
+        getActivity().getActionBar().setTitle(R.string.create_list);
+
         return theCreateListView;
     }
 
