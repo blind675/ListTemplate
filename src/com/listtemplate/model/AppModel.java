@@ -306,12 +306,9 @@ public class AppModel {
      * @return if the list is all checked or ot
      */
     public boolean isTheListComplete(){
-        if(mIndexOfTheCurrentlyOpenedList != -1 && mNumberOfSelectedItems == mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getNumberOfElements()){
-            return true;
-        } else {
-            return false;
-        }
+        return mIndexOfTheCurrentlyOpenedList != -1 && mNumberOfSelectedItems == mOpenLists.get(mIndexOfTheCurrentlyOpenedList).getNumberOfElements();
     }
+
     //*************************************** CREATING LIST PART **************************************************//
 
     /**
@@ -368,7 +365,9 @@ public class AppModel {
      * @param context the context
      */
     public void updateList(Context context) {
-        DBController.updateList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList),context);
+        if( mIndexOfTheCurrentlyOpenedList!= -1 ){
+            DBController.updateList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList),context);
+        }
     }
 
     /**
@@ -381,6 +380,8 @@ public class AppModel {
         DBController.removeList(mOpenLists.get(mIndexOfTheCurrentlyOpenedList),context);
         // remove last record of mOpenLists
         mOpenLists.remove(mIndexOfTheCurrentlyOpenedList);
+        // close the current list
+        closeCurrentlyOpenList();
     }
 
     /**

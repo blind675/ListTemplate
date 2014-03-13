@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="fill_parent"
-              android:layout_height="35dp"
-              android:background="@color/white"
-              android:baselineAligned="false">
-
-    <CheckBox
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:text="@string/element"
-        android:id="@+id/checkBox"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:checked="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:layout_height="35dp"
+        android:background="@color/white">
 
+
+    <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/imageCheck"
+            android:src="@drawable/ic_black_dot"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView"
-            android:layout_centerVertical="true" android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" android:layout_marginRight="24dp"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/element"
+            android:id="@+id/checkBox"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+    </TextView>
 
-</RelativeLayout>
+</LinearLayout>
+

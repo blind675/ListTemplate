@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
+import com.haarman.listviewanimations.itemmanipulation.SwipeDismissAdapter;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.HomeListAdapter;
 import com.listtemplate.model.AppModel;
@@ -37,10 +40,37 @@ public class HomeFragment extends Fragment{
 
         // Create a custom adapter
         mAdapter = new HomeListAdapter(getActivity().getApplicationContext(),AppModel.getInstance().getOpenedLists());
+
+        // Use the swipe to delete with undo from Niek Haarman ( http://nhaarman.github.io/ListViewAnimations/ )
+        // Wrap my adapter in his
+
+        SwipeDismissAdapter swipeAdapter = new SwipeDismissAdapter(mAdapter, new OnDismissCallback() {
+            @Override
+            public void onDismiss(AbsListView absListView, int[] reverseSortedPositions) {
+
+                for (int position : reverseSortedPositions) {
+                    // open the list
+                    AppModel.getInstance().openList(position);
+                    // discard the list
+                    AppModel.getInstance().discardList(getActivity().getApplicationContext());
+                    // refresh the list
+                    mAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+        swipeAdapter.setAbsListView(mListView);
+
         // Set the custom adapter
-        mListView.setAdapter(mAdapter);
+        mListView.setAdapter(swipeAdapter);
+
         // Set a custom event listener
         mListView.setOnItemClickListener(new ListItemClickListener());
+
+        // In case i didn't come from the menu
+        // set the title again :)
+        getActivity().getActionBar().setTitle(R.string.home);
+
         return theHomeView;
 
     }
