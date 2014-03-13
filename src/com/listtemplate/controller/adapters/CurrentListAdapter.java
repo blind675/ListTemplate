@@ -1,11 +1,15 @@
 package com.listtemplate.controller.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.listtemplate.R;
 import com.listtemplate.model.AppModel;
 
@@ -34,19 +38,19 @@ public class CurrentListAdapter extends ArrayAdapter<String> {
 
         // Get the name of the element
         String elementName = AppModel.getInstance().getElementOfTheCurrentList(position);
-        // Get the checkbox
-        CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
-        // Set the checkbox
-        checkBox.setText(elementName);
-        checkBox.setChecked(AppModel.getInstance().isElementSelected(elementName));
-
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CheckBox checkBox = (CheckBox) view;
-                AppModel.getInstance().toggleSelectedForElement((String) checkBox.getText());
-            }
-        });
+        // Get the text view
+        final TextView textView = (TextView) convertView.findViewById(R.id.checkBox);
+        // Set the text view
+        textView.setText(elementName);
+        // Get the image view
+        final ImageView imageView = (ImageView) convertView.findViewById(R.id.imageCheck);
+        // Set the strike-through if needed and change picture
+        if(AppModel.getInstance().isElementSelected(elementName)){
+            // Set the strike-through
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            // Set the image
+            imageView.setImageResource(R.drawable.ic_accept);
+        }
 
         return convertView;
     }
