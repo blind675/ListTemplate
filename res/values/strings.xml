@@ -41,6 +41,8 @@
     </string>
     <string name="add_author">Add author name:</string>
     <string name="receive_mail">Willing to receive thank you e-mails:</string>
+    <string name="share_template">Share this template online:</string>
+    <string name="upload_picture">Upload background picture:</string>
 
     <!-- general -->
     <string name="thumbnail_photo">Thumbnail Photo</string>

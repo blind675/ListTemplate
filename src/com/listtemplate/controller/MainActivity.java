@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.listtemplate.R;
 import com.listtemplate.controller.adapters.MenuAdapter;
+import com.listtemplate.controller.fragments.CreateTemplateFragment;
 import com.listtemplate.controller.fragments.CurrentListFragment;
 import com.listtemplate.controller.fragments.HomeFragment;
 import com.listtemplate.controller.utils.MenuTracker;
@@ -25,7 +26,7 @@ import com.listtemplate.model.AppModel;
 /**
  * The main activity of the application. All else is based on fragments.
  */
-public class MyActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity {
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -147,7 +148,7 @@ public class MyActivity extends FragmentActivity {
             case 4: /** Called when the user clicks the Create Template tab */
                 setTitle(R.string.create_template);
                 // get the fragment for spending
-                // fragment = new CreateTemplateFragment();
+                fragment = new CreateTemplateFragment();
                 // set the menu tracker to create template
                 MenuTracker.getInstance().setOpenedFragment(MenuTracker.CREATE_TEMPLATE);
                 break;
