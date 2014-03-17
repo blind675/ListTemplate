@@ -28,14 +28,17 @@ public class CreateTemplateFragment extends Fragment {
     private List<String> mElementsList = new ArrayList<String>();
     private static EditText mTitleView;
     private static EditText mAddElementView;
+    private static EditText mSecondAddElementView;
     private static EditText mDescriptionView;
     private static CheckBox mAddAuthorCheck;
     private static CheckBox mReceiveEmailCheck;
     private static CheckBox mShareCheck;
     private static Button mSaveButton;
     private static byte[] mBackground;
-    private ArrayAdapter<String> mAdapter;
-    private SwipeDismissAdapter mSwipeAdapter;
+    private ArrayAdapter<String> mFirstListAdapter;
+    private ArrayAdapter<String> mSecondListAdapter;
+    private SwipeDismissAdapter mFirstSwipeAdapter;
+    private SwipeDismissAdapter mSecondSwipeAdapter;
 
     /**
     /**
@@ -49,28 +52,47 @@ public class CreateTemplateFragment extends Fragment {
         View theCreateTemplateView = inflater.inflate(R.layout.fragment_create_template, container, false);
         assert theCreateTemplateView != null;
 
-        // Get ListView object from xml
-        ListView listView = (ListView) theCreateTemplateView.findViewById(R.id.listView);
+        // Get the first ListView object from xml
+        ListView firstListView = (ListView) theCreateTemplateView.findViewById(R.id.listView);
 
         // Create a list adapter
         // reuse the list adapter from the create list part
-        mAdapter = new CreateListAdapter(getActivity().getApplicationContext(),mElementsList);
+        mFirstListAdapter = new CreateListAdapter(getActivity().getApplicationContext(),mElementsList);
         // Use the swipe to delete with undo from Niek Haarman ( http://nhaarman.github.io/ListViewAnimations/ )
         // Wrap my adapter in his
 
-        mSwipeAdapter = new SwipeDismissAdapter(mAdapter, new OnDismissCallback() {
+        mFirstSwipeAdapter = new SwipeDismissAdapter(mFirstListAdapter, new OnDismissCallback() {
             @Override
             public void onDismiss(AbsListView absListView, int[] reverseSortedPositions) {
 
                 for (int position : reverseSortedPositions) {
                     mElementsList.remove(position);
-                    mAdapter.notifyDataSetChanged();
+                    mFirstListAdapter.notifyDataSetChanged();
                 }
 
             }
         });
-        mSwipeAdapter.setAbsListView(listView);
-        listView.setAdapter(mSwipeAdapter);
+        mFirstSwipeAdapter.setAbsListView(firstListView);
+        firstListView.setAdapter(mFirstSwipeAdapter);
+
+        // Get the second list view
+        ListView secondListView = (ListView) theCreateTemplateView.findViewById(R.id.listViewSecond);
+        // Exactly same thing as above
+        mSecondListAdapter = new CreateListAdapter(getActivity().getApplicationContext(),mElementsList);
+        mSecondSwipeAdapter = new SwipeDismissAdapter(mSecondListAdapter, new OnDismissCallback() {
+            @Override
+            public void onDismiss(AbsListView absListView, int[] reverseSortedPositions) {
+
+                for (int position : reverseSortedPositions) {
+                    mElementsList.remove(position);
+                    mSecondListAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+        mFirstSwipeAdapter.setAbsListView(secondListView);
+        secondListView.setAdapter(mFirstSwipeAdapter);
+
 
         // Get the list title view
         mTitleView = (EditText) theCreateTemplateView.findViewById(R.id.templateTitle);
@@ -81,8 +103,20 @@ public class CreateTemplateFragment extends Fragment {
 
         // Get the add element view
         mAddElementView = (EditText) theCreateTemplateView.findViewById(R.id.addElement);
+        // Put an event action when tap on add edit view
+        mAddElementView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // don't show the keyboard
+                // TODO: show the transparent vew and the other list
+                // and put the focus on the other edit text so the keyboard pops up.
+            }
+        });
+
+        // Get the second add element view
+        mSecondAddElementView = (EditText) theCreateTemplateView.findViewById(R.id.addElement);
         // Put an event listener on the add text view
-        mAddElementView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+        mSecondAddElementView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 if(actionId== EditorInfo.IME_ACTION_DONE){
@@ -100,7 +134,7 @@ public class CreateTemplateFragment extends Fragment {
             public void onClick(View v) {
                 // Perform action on click
                 // Process the data and save the template
-                //saveTheTemplate();
+                // TODO: saveTheTemplate();
             }
         });
 
@@ -122,8 +156,9 @@ public class CreateTemplateFragment extends Fragment {
         // add element
         mElementsList.add(mAddElementView.getText().toString());
 
-        // refresh the list
-        mSwipeAdapter.notifyDataSetChanged();
+        // refresh the lists
+        mFirstSwipeAdapter.notifyDataSetChanged();
+        mSecondSwipeAdapter.notifyDataSetChanged();
 
         // clear the field
         mAddElementView.getText().clear();

@@ -204,13 +204,40 @@
         android:layout_height="fill_parent"
         android:background="@color/white"
         android:alpha="0.7"
-        android:id="@+id/coverView">
+        android:id="@+id/coverView"
+        android:visibility="gone">
 
         </View>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/addingToList"
+        android:layout_margin="5dp"
+        android:visibility="gone">
+
+        <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listViewSecond"
+                android:layout_above="@+id/addElementSecond"
+                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grayBlueDark"
+                android:transcriptMode="alwaysScroll"
+                />
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addElementSecond"
+                android:layout_alignParentBottom="true"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:hint="@string/add_element"
+                android:cursorVisible="true"
+                android:imeOptions="actionDone"/>
 
         </RelativeLayout>
 
